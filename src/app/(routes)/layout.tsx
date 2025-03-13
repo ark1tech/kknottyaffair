@@ -5,6 +5,7 @@ import {
   Cinzel,
   Cedarville_Cursive,
   EB_Garamond,
+  Crimson_Pro,
 } from "next/font/google";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
@@ -22,6 +23,11 @@ const cedarvilleCursive = Cedarville_Cursive({
 
 const garamondSerif = EB_Garamond({
   variable: "--font-body-serif",
+  subsets: ["latin"],
+});
+
+const crimsonSerif = Crimson_Pro({
+  variable: "--font-body-serif-2",
   subsets: ["latin"],
 });
 
@@ -54,8 +60,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} ${titleGothic.variable} ${cedarvilleCursive.variable} ${garamondSerif.variable} antialiased`}
-      >
+        className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} ${titleGothic.variable} ${cedarvilleCursive.variable} ${garamondSerif.variable} ${crimsonSerif.variable} antialiased`}
+      > 
         {children}
       </body>
     </html>

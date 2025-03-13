@@ -51,14 +51,14 @@ export default function Video() {
     <div className="relative h-full w-full">
       <video
         // ref={videoRef}
-        className="mask-gradient/z h-full w-full object-cover object-center brightness-50"
+        className="mask-gradient/z h-full w-full object-cover object-center brightness-80"
         preload="auto"
         autoPlay
         loop
         muted
         playsInline
       >
-        <source src="/videos/idk.mp4" type="video/mp4" />
+        <source src="/videos/idk.mp4#t=15" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

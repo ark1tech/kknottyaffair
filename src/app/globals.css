@@ -12,25 +12,23 @@
 
   --font-sans: var(--font-body-sans), sans-serif, system-ui;
   --font-mono: var(--font-body-mono), monospace, system-ui;
-  --font-serif: var(--font-body-serif), serif, system-ui;
+  --font-serif: var(--font-body-serif-2), serif, system-ui;
   --font-cursive: var(--font-body-cursive), serif, system-ui;
 
   /* Font Sizes */
 
-  --heading-xl: 52px;
-  --heading-l: 36px;
-  --heading-m: 24px;
-  --heading-s: 18px;
+  --text-heading-xl: 52px;
+  --text-heading-l: 36px;
+  --text-heading-m: 24px;
+  --text-heading-s: 18px;
 
-  --subheading-xl: 32px;
-  --subheading-l: 28px;
-  --subheading-m: 22px;
-  --subheading-s: 16px;
+  --text-sub-m: 22px;
+  --text-sub-s: 16px;
+  --text-sub-xs: 14px;
 
-  --bodytext-xl: 20px;
-  --bodytext-l: 18px;
-  --bodytext-m: 16px;
-  --bodytext-s: 14px;
+  --text-body-l: 20px;
+  --text-body-m: 18px;
+  --text-body-s: 16px;
 
   /* Colors */
 
@@ -56,8 +54,8 @@
   --color-text-secondary-light: #c8c6c6;
 
   /* Sizes */
-  --max-width: 1500px;
-  --padded-max-width: 1200px;
+  --container-max: 1500px;
+  --container-padded-max: 1200px;
 
   /* Viewport */
   --breakpoint-padding: 1250px;
@@ -79,24 +77,30 @@
   }
 
   h1 {
-    @apply text-[length:var(--heading-l)] sm:text-left sm:text-[length:var(--heading-xl)];
+    @apply text-heading-l sm:text-left sm:text-heading-xl;
   }
   h2 {
-    @apply text-[length:var(--heading-m)] sm:text-left sm:text-[length:var(--heading-l)];
+    @apply text-heading-m sm:text-left sm:text-heading-l;
   }
   h3 {
-    @apply text-[length:var(--heading-s)] sm:text-left sm:text-[length:var(--heading-m)];
+    @apply text-heading-s sm:text-left sm:text-heading-m;
+  }
+  h4 {
+    @apply text-sub-s sm:text-heading-m;
+  }
+  h4 {
+    @apply text-sub-xs sm:text-heading-s;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-sans leading-[1] font-[500] tracking-tight;
+    @apply font-sans leading-[1] font-[550] tracking-tight;
   }
 
   a,
   p {
-    @apply font-sans tracking-tighter;
+    @apply text-body-s tracking-tight md:text-body-m lg:text-body-l font-sans font-[400];
   }
 }
 
@@ -123,13 +127,13 @@ body {
   /* overflow-y: scroll; */
 }
 main {
-  @apply mx-auto flex max-w-[var(--max-width)] flex-col;
+  @apply mx-auto flex max-w-max flex-col;
 }
 
 .container {
-  @apply mx-auto flex w-full max-w-[var(--padded-max-width)] flex-col px-[1.5rem] py-[1.5rem] padding:px-[0rem] padding:py-[4rem] sm:py-[4rem];
+  @apply mx-auto flex w-full max-w-padded-max flex-col px-[1.5rem] py-[1.5rem] padding:px-[0rem] padding:py-[4rem] sm:py-[4rem];
 }
 
 header {
-  @apply mx-auto flex w-full max-w-[var(--padded-max-width)] flex-row;
+  @apply mx-auto flex w-full max-w-padded-max flex-row;
 }

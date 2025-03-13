@@ -1,6 +1,6 @@
-export default function Story() {
+export default function Schedule() {
   return (
-    <div className="flex flex-col gap-[1rem]">
+    <div className="flex flex-col gap-[1.5rem]">
       <h1 className="font-title-sans">Our Story</h1>
       <div className="flex flex-col gap-[0.75rem]">
         {/* Highschool Photos */}
