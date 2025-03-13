@@ -1,15 +1,32 @@
 import "../globals.css";
-import { Work_Sans, Geist_Mono, Cinzel } from "next/font/google";
+import {
+  Work_Sans,
+  Geist_Mono,
+  Cinzel,
+  Cedarville_Cursive,
+  EB_Garamond,
+} from "next/font/google";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 
 const workSans = Work_Sans({
-  variable: "--font-work-sans",
+  variable: "--font-body-sans",
+  subsets: ["latin"],
+});
+
+const cedarvilleCursive = Cedarville_Cursive({
+  variable: "--font-body-cursive",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const garamondSerif = EB_Garamond({
+  variable: "--font-body-serif",
   subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-body-mono",
   subsets: ["latin"],
 });
 
@@ -37,8 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} 
-          ${titleGothic.variable} antialiased`}
+        className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} ${titleGothic.variable} ${cedarvilleCursive.variable} ${garamondSerif.variable} antialiased`}
       >
         {children}
       </body>

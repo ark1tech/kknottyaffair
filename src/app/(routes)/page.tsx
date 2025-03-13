@@ -1,21 +1,29 @@
-// import Image from "next/image";
-import { Video } from "@/components/VideoBackground";
+import Image from "next/image";
+import monogram from "@p/images/monogram.png";
+import Video from "@/components/VideoBackground";
+import Story from "@/components/sections/Story";
 
 export default function Home() {
   return (
     <>
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <Video />
-      </div>
-      <div className="relative z-10 flex h-full w-full flex-col">
-        <div className="relative flex h-[100svh] w-full flex-col items-center justify-center text-[var(--color-text-primary)]">
-          <h2 className="font-title-serif">The Wedding Of</h2>
-          <h1 className="font-title-sans">King & Kim</h1>
+      <header className="h-[10svh] items-center justify-center">
+        <h3 className="font-title-cursive font-[900]">King and Kim</h3>
+        <Image
+          src={monogram}
+          alt="King and Kim monogram"
+          className="h-auto w-[50px]"
+        />
+      </header>
+      <main className="h-[90svh]">
+        <div className="relative inset-0 z-0 h-full">
+          <Video />
         </div>
-        <div className="h-[100svh]">
-          <h1>Hello</h1>
+      </main>
+      <main className="min-h-[100svh]">
+        <div className="container">
+          <Story />
         </div>
-      </div>
+      </main>
     </>
   );
 }

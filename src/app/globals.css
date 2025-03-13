@@ -8,14 +8,16 @@
   /* Font Styles */
 
   --font-title-sans: var(--font-title-gothic), sans-serif, system-ui;
-  --font-title-serif: var(--font-title-cursive), monospace, system-ui;
+  --font-title-cursive: var(--font-title-cursive), monospace, system-ui;
 
-  --font-sans: var(--font-work-sans), sans-serif, system-ui;
-  --font-mono: var(--font-geist-mono), monospace, system-ui;
+  --font-sans: var(--font-body-sans), sans-serif, system-ui;
+  --font-mono: var(--font-body-mono), monospace, system-ui;
+  --font-serif: var(--font-body-serif), serif, system-ui;
+  --font-cursive: var(--font-body-cursive), serif, system-ui;
 
   /* Font Sizes */
 
-  --heading-xl: 48px;
+  --heading-xl: 52px;
   --heading-l: 36px;
   --heading-m: 24px;
   --heading-s: 18px;
@@ -52,12 +54,19 @@
 
   --color-text-primary-light: #ededed;
   --color-text-secondary-light: #c8c6c6;
+
+  /* Sizes */
+  --max-width: 1500px;
+  --padded-max-width: 1200px;
+
+  /* Viewport */
+  --breakpoint-padding: 1250px;
 }
 
 @layer base {
   ::-webkit-scrollbar {
-    width: 8px; 
-    background: transparent; 
+    width: 8px;
+    background: transparent;
   }
 
   ::-webkit-scrollbar-track {
@@ -68,7 +77,6 @@
     background: rgba(0, 0, 0, 0.3); /* Slightly visible for usability */
     border-radius: 4px;
   }
-
 
   h1 {
     @apply text-[length:var(--heading-l)] sm:text-left sm:text-[length:var(--heading-xl)];
@@ -92,6 +100,20 @@
   }
 }
 
+@layer utilities {
+  .mask-gradient {
+    --bottom: black 40%;
+    --top: transparent 100%;
+
+    mask-image: linear-gradient(to bottom, var(--bottom), var(--top));
+    -webkit-mask-image: linear-gradient(to bottom, var(--bottom), var(--top));
+  }
+
+  .debug {
+    @apply !border-[2px] !border-red-500;
+  }
+}
+
 body {
   background: var(--color-background);
   color: var(--color-text-primary);
@@ -100,17 +122,14 @@ body {
   /* scrollbar-gutter: stable both-edges; */
   /* overflow-y: scroll; */
 }
-
 main {
-  max-width: 1024px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+  @apply mx-auto flex max-w-[var(--max-width)] flex-col;
 }
 
 .container {
-  max-width: 1536px;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 100svh;
+  @apply mx-auto flex w-full max-w-[var(--padded-max-width)] flex-col px-[1.5rem] py-[1.5rem] padding:px-[0rem] padding:py-[4rem] sm:py-[4rem];
+}
+
+header {
+  @apply mx-auto flex w-full max-w-[var(--padded-max-width)] flex-row;
 }
