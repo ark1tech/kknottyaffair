@@ -1,32 +1,25 @@
-export default function Schedule() {
+export default function Info() {
   return (
-    <div className="flex flex-col gap-[1.5rem]">
-      <h1 className="font-title-sans">Our Story</h1>
-      <div className="flex flex-col gap-[0.75rem]">
-        {/* Highschool Photos */}
+    <div className="flex flex-col gap-[1.5rem] md:flex-row">
+      <div className="gap-title flex w-full scale-90 rotate-[-3deg] md:rotate-[-5deg] flex-col rounded-sm border border-text-secondary-light/50 bg-background-light p-[2.5rem] shadow-[0px_0px_10px_rgba(0,0,0,0.06)]">
+        <h3 className="font-title-sans text-primary-light">Wedding</h3>
         <p>
-          Kim and King first crossed paths as high school classmates at Nueva
-          Ecija University of Science and Technology in 2008. Their journey from
-          acquaintances to best friends began in 2010 when they were seated next
-          to each other in a third-year Chemistry class. This seating
-          arrangement sparked a friendship that grew stronger over time,
-          eventually blossoming into a deep and lasting bond.
+          St. Nicholas of Tolentine Parish Cathedral, Cabanatuan City, Nueva
+          Ecija, Philippines
         </p>
-        {/* Work Photos / Flurries / Backyard Dates */}
+      </div>
+      <div className="gap-title flex w-full rotate-[2deg] md:rotate-[4deg] flex-col rounded-sm border border-text-secondary-light/50 bg-background-light p-[2.5rem] shadow-[0px_0px_10px_rgba(0,0,0,0.06)]">
+        <h3 className="font-title-sans text-primary-light">Reception</h3>
         <p>
-          As college approached, their paths diverged as they pursued their
-          individual goals and aspirations, leading to a temporary sacrifice of
-          their friendship. However, fate had other plans. The two reunited when
-          King informed Kim that they had moved to the same subdivision where
-          Kim resided in Cabanatuan City. They rekindled their bond over simple
-          conversations, enjoying McFlurries over their backyard dates or
-          sipping coffee during their “bring your friend to work” trips.
+          The Gardens, Lakewood Subdivision, Cabanatuan City, Nueva Ecija,
+          Philippines
         </p>
+      </div>
+      <div className="gap-title flex w-full scale-85 rotate-[-1deg] md:rotate-[-2deg] flex-col rounded-sm border border-text-secondary-light/50 bg-background-light p-[2.5rem] shadow-[0px_0px_10px_rgba(0,0,0,0.06)]">
+        <h3 className="font-title-sans text-primary-light">Wedding Place</h3>
         <p>
-          As cliché as it may sound, their story unfolded as if the stars had
-          aligned, bringing them back together. Kim and King became a couple on
-          January 6, 2022, in Baguio City, and got officially engaged on June
-          16, 2024, in Tagaytay City.
+          St. Nicholas of Tolentine Parish Cathedral, Cabanatuan City, Nueva
+          Ecija, Philippines
         </p>
       </div>
     </div>
