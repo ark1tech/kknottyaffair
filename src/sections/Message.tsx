@@ -1,6 +1,6 @@
 export default function Message() {
   return (
-    <div className="bg-white py-[4rem] border-t-text-primary/20 border-t">
+    <div className=" py-[2rem] ">
       <div className="gap-title readable-container flex flex-col">
         <h3 className="font-title-sans text-primary-light">
           Dear Family and Friends,

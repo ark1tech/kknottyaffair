@@ -40,7 +40,11 @@ export default function Home() {
         <div className="container flex flex-col gap-[4rem]">
           <Story />
         </div>
-        <Message />
+      </main>
+      <main className="bg-white border-[#d8d8d895] border-t">
+        <div className="container">
+          <Message />
+        </div>
       </main>
     </>
   );
