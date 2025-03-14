@@ -51,6 +51,7 @@ export default function Video() {
       <video
         // ref={videoRef}
         className="mask-gradient/z h-full w-full object-cover object-center brightness-70"
+        poster="images/photoshoot/main_bg.webp"
         preload="auto"
         autoPlay
         loop
