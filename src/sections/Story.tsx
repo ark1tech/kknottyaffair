@@ -1,8 +1,8 @@
 export default function Story() {
   return (
-    <div className="flex flex-col gap-[1.5rem]">
+    <div className="flex flex-col gap-title readable-container">
       <h1 className="font-title-sans">Our Story</h1>
-      <div className="flex flex-col gap-[0.75rem]">
+      <div className="flex flex-col gap-paragraph">
         {/* Highschool Photos */}
         <p>
           Kim and King first crossed paths as high school classmates at Nueva

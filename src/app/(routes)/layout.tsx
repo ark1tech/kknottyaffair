@@ -3,7 +3,7 @@ import {
   Work_Sans,
   Geist_Mono,
   Cinzel,
-  Cedarville_Cursive,
+  La_Belle_Aurore,
   EB_Garamond,
   Crimson_Pro,
 } from "next/font/google";
@@ -15,7 +15,7 @@ const workSans = Work_Sans({
   subsets: ["latin"],
 });
 
-const cedarvilleCursive = Cedarville_Cursive({
+const cedarvilleCursive = La_Belle_Aurore({
   variable: "--font-body-cursive",
   subsets: ["latin"],
   weight: "400",

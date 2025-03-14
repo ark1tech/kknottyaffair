@@ -51,7 +51,7 @@ export default function Video() {
     <div className="relative h-full w-full">
       <video
         // ref={videoRef}
-        className="mask-gradient/z h-full w-full object-cover object-center brightness-80"
+        className="mask-gradient/z h-full w-full object-cover object-center brightness-70"
         preload="auto"
         autoPlay
         loop
