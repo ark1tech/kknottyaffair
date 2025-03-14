@@ -31,6 +31,8 @@
   --text-body-s: 18px;
   --text-body-xs: 16px;
 
+  --text-footnote: 10px;
+
   /* Colors */
 
   --color-background: #fffcf1;
@@ -95,7 +97,7 @@
     @apply text-body-s xs:text-2xl sm:text-3xl md:text-3xl;
   }
   .hero-style {
-    @apply text-white drop-shadow-xl;
+    @apply text-white drop-shadow-lg;
   }
 
   h1 {

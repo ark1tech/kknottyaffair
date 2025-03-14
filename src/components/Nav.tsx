@@ -31,7 +31,7 @@ export default function Nav() {
     // Implement cn lib or something if it's better?
     <>
       <nav
-        className={`fixed top-0 right-0 left-0 z-50 bg-background shadow-xl transition-transform duration-300 ${
+        className={`fixed top-0 right-0 left-0 z-50 bg-white shadow-xl transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -68,7 +68,7 @@ export default function Nav() {
         </div>
       </nav>
       <div
-        className={`fixed inset-y-0 right-0 z-60 h-full w-[65%] transform bg-background transition-transform duration-300 ease-in-out sm:w-[40%] ${isMenuOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}
+        className={`fixed inset-y-0 right-0 z-60 h-full w-[65%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] ${isMenuOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}
         role="dialog"
         aria-modal="true"
       >

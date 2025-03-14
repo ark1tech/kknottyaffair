@@ -3,7 +3,7 @@
 
 export default function Hero() {
   return (
-    <div className="flex-col-center hero-style relative z-10 mt-[2.5svh] h-[95svh] gap-[1.5rem]">
+    <div className="flex-col-center hero-style relative z-10 mt-[2.5svh] h-fit w-fit gap-[1.5rem]">
       <h1 className="hero-heading font-title-cursive font-[500]">
         King and Kim
       </h1>
