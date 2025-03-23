@@ -1,6 +1,6 @@
 import "../globals.css";
 import {
-  Work_Sans,
+  Barlow,
   Geist_Mono,
   Cinzel,
   La_Belle_Aurore,
@@ -10,9 +10,12 @@ import {
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 
-const workSans = Work_Sans({
+// TAN Memories
+
+const workSans = Barlow({
   variable: "--font-body-sans",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 const cedarvilleCursive = La_Belle_Aurore({
@@ -34,6 +37,11 @@ const crimsonSerif = Crimson_Pro({
 const geistMono = Geist_Mono({
   variable: "--font-body-mono",
   subsets: ["latin"],
+});
+
+const titleCustom = localFont({
+  src: "../../../public/fonts/Eyesome Script.otf",
+  variable: "--font-title-fancy",
 });
 
 const titleCursive = localFont({
@@ -60,8 +68,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} ${titleGothic.variable} ${cedarvilleCursive.variable} ${garamondSerif.variable} ${crimsonSerif.variable} antialiased`}
-      > 
+        className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} ${titleGothic.variable} ${cedarvilleCursive.variable} ${garamondSerif.variable} ${crimsonSerif.variable} ${titleCustom.variable}antialiased`}
+      >
         {children}
       </body>
     </html>

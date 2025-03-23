@@ -1,7 +1,7 @@
-export default function Schedule() {
+export default function Program() {
   return (
     <div className="flex flex-col gap-[1.5rem]">
-      <h1 className="font-title-sans">Our Story</h1>
+      <h1 className="font-title-sans">Wedding Program</h1>
       <div className="flex flex-col gap-[0.75rem]">
         {/* Highschool Photos */}
         <p>

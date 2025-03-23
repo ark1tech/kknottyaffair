@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+/* @plugin "tailwindcss-animate"; */
+@plugin "tailwindcss-motion";
+
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -9,6 +13,7 @@
 
   --font-title-sans: var(--font-title-gothic), sans-serif, system-ui;
   --font-title-cursive: var(--font-title-cursive), monospace, system-ui;
+  --font-title-fancy: var(--font-title-fancy), serif, system-ui;
 
   --font-sans: var(--font-body-sans), sans-serif, system-ui;
   --font-mono: var(--font-body-mono), monospace, system-ui;
@@ -31,12 +36,12 @@
   --text-body-s: 18px;
   --text-body-xs: 16px;
 
-  --text-footnote: 10px;
+  --text-footnote: 14px;
 
   /* Colors */
 
-  --color-background: #fffcf1;
-  --color-background-light:rgb(255, 255, 255)1;
+  --color-background: #fffdf6;
+  --color-background-light: #fefff7;
 
   --color-primary: #454b1b;
   --color-primary-light: #819651;
@@ -91,13 +96,13 @@
   }
 
   .hero-heading {
-    @apply text-5xl xs:text-7xl md:text-8xl;
+    @apply text-5xl xs:text-7xl md:text-[7rem];
   }
   .hero-subheading {
     @apply text-body-s xs:text-2xl sm:text-3xl md:text-3xl;
   }
   .hero-style {
-    @apply text-white drop-shadow-lg;
+    @apply text-white;
   }
 
   h1 {
@@ -107,7 +112,7 @@
     @apply text-heading-m sm:text-heading-l;
   }
   h3 {
-    @apply text-heading-s sm:text-heading-m;
+    @apply font-title-fancy text-heading-s sm:text-heading-m;
   }
   h4 {
     @apply text-sub-s sm:text-heading-m;
@@ -119,21 +124,21 @@
   h1,
   h2,
   h3 {
-    @apply font-sans leading-[1] font-[550];
+    @apply leading-[1] font-[550];
   }
 
   a,
   p {
-    @apply font-serif text-body-s font-[400] tracking-tight md:text-body-m lg:text-body-l;
+    @apply font-serif text-body-s font-[300] tracking-tight md:text-body-m lg:text-body-l;
   }
 
   .nav-text {
-    @apply font-serif text-body-xs font-[400] tracking-tight md:text-body-s lg:text-body-m;
+    @apply font-serif text-body-xs font-[300] tracking-tight md:text-body-s lg:text-body-m;
   }
 }
 
 @layer utilities {
-  .mask-gradient {
+  /* .mask-gradient {
     --bottom: black 40%;
     --top: transparent 100%;
 
@@ -147,7 +152,7 @@
 
   .blur-gradient {
     @apply [background-image:linear-gradient(to_bottom,white_0%,transparent_20%,transparent_80%,white_100%)];
-  }
+  } */
 
   .debug {
     @apply !border-[2px] !border-red-500;
@@ -156,8 +161,24 @@
   .flex-col-center {
     @apply flex flex-col items-center justify-center;
   }
+
   .flex-row-center {
     @apply flex flex-row items-center justify-center;
+  }
+
+  .flex-col-top {
+    @apply flex flex-col items-center justify-start;
+  }
+
+  .flex-col-bot {
+    @apply flex flex-col items-center justify-end;
+  }
+
+  .flex-row-top {
+    @apply flex flex-row items-start justify-center;
+  }
+  .flex-row-bot {
+    @apply flex flex-row items-end justify-center;
   }
 
   .button-padding {
@@ -166,6 +187,21 @@
 
   .link-underline {
     @apply relative after:absolute after:bottom-[-2px] after:left-0 after:h-[1px] after:w-full after:bg-current after:transition-transform hover:after:scale-x-110;
+  }
+
+  .magic-text {
+    /* animation: background-pan 4s linear infinite; */
+    background: linear-gradient(
+      to bottom right,
+      var(--color-background-light),
+      var(--color-secondary),
+      var(--color-secondary-light)
+    );
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
   }
 }
 

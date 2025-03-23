@@ -1,8 +1,10 @@
+// import FadeIn from "@/components/FadeIn";
+
 export default function Story() {
   return (
-    <div className="flex flex-col gap-title readable-container">
+    <div className="gap-title readable-container flex flex-col">
       <h3 className="font-title-sans text-primary-light">Our Story</h3>
-      <div className="flex flex-col gap-paragraph">
+      <div className="gap-paragraph flex flex-col">
         {/* Highschool Photos */}
         <p>
           Kim and King first crossed paths as high school classmates at Nueva
@@ -20,7 +22,8 @@ export default function Story() {
           King informed Kim that they had moved to the same subdivision where
           Kim resided in Cabanatuan City. They rekindled their bond over simple
           conversations, enjoying McFlurries over their backyard dates or
-          sipping coffee during their “bring your friend to work” trips.
+          sipping coffee during their &ldquo;bring your friend to work&rdquo;
+          trips.
         </p>
         <p>
           As cliché as it may sound, their story unfolded as if the stars had

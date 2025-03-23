@@ -3,6 +3,8 @@
 import Image from "next/image";
 import monogram from "@p/images/monogram_cropped.png";
 
+import { cn } from "@/lib/utils";
+
 import { useEffect, useState } from "react";
 
 export default function Nav() {
@@ -19,7 +21,7 @@ export default function Nav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const shouldShow = window.scrollY > window.innerHeight * 0.75;
+      const shouldShow = window.scrollY > window.innerHeight * 0.05;
       setIsVisible(shouldShow);
     };
 
@@ -28,12 +30,12 @@ export default function Nav() {
   }, []);
 
   return (
-    // Implement cn lib or something if it's better?
     <>
       <nav
-        className={`fixed top-0 right-0 left-0 z-50 bg-white shadow-xl transition-transform duration-300 ${
+        className={cn(
+          "fixed top-0 right-0 left-0 z-50 bg-white shadow-xl transition-transform duration-300",
           isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        )}
       >
         <div className="nav-container flex flex-row items-center justify-between py-4">
           <div className="flex flex-row items-center gap-[0.5rem]">
@@ -68,7 +70,10 @@ export default function Nav() {
         </div>
       </nav>
       <div
-        className={`fixed inset-y-0 right-0 z-60 h-full w-[65%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] ${isMenuOpen ? "translate-x-0" : "translate-x-full"} md:hidden`}
+        className={cn(
+          "fixed inset-y-0 right-0 z-60 h-full w-[65%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden",
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        )}
         role="dialog"
         aria-modal="true"
       >

@@ -47,20 +47,23 @@ export default function Video() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 mt-[2.5svh] h-[95svh] w-full">
-      <video
-        // ref={videoRef}
-        className="mask-gradient/z h-full w-full object-cover object-center brightness-70"
-        poster="images/photoshoot/main_bg.webp"
-        preload="auto"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source src="/videos/idk.mp4#t=15" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+    <div className="absolute inset-0 z-0 h-[100dvh] w-full">
+      <div className="relative h-full w-full">
+        <video
+          // ref={videoRef}
+          className="h-full w-full object-cover object-center brightness-[85%]"
+          poster="images/photoshoot/main_bg.webp"
+          preload="auto"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/videos/idk.mp4#t=15" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80"></div>
+      </div>
     </div>
   );
 }

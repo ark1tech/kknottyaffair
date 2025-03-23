@@ -1,31 +1,30 @@
 import Video from "@/components/VideoBackground";
+import Nav from "@/components/Nav";
+
 import Story from "@/sections/Story";
 import Message from "@/sections/Message";
 import Hero from "@/sections/Hero";
 import Intro from "@/sections/Intro";
 import Info from "@/sections/Info";
-import Nav from "@/components/Nav";
-// import Header from "@/components/sections/Header";
 
-import Image from "next/image";
-import banner_one from "@p/images/photoshoot/banner_one.webp";
-import banner_one_mobile from "@p/images/photoshoot/banner_one_mobile.jpg";
+// import Image from "next/image";
+// import banner_one from "@p/images/photoshoot/banner_one.webp";
+// import banner_one_mobile from "@p/images/photoshoot/banner_one_mobile.jpg";
 
 export default function Home() {
   return (
     <>
       <Nav />
       <main className="min-h-[100svh]">
-        <div className="flex-col-center relative h-[100svh]">
+        <div className="flex-col-bot relative h-[100svh]">
           <Video />
           <Hero />
         </div>
         <div className="container flex flex-col gap-[4rem]">
           <Intro />
           <Info />
-          <div className=""></div>
         </div>
-        <div className="h-[60svh]">
+        {/* <div className="h-[60svh]">
           <Image
             src={banner_one}
             alt="King and Kim monogram"
@@ -36,12 +35,12 @@ export default function Home() {
             alt="King and Kim monogram"
             className="flex h-full w-full object-cover object-top sm:hidden"
           />
-        </div>
+        </div> */}
         <div className="container flex flex-col gap-[4rem]">
           <Story />
         </div>
       </main>
-      <main className="bg-white border-[#d8d8d895] border-t">
+      <main className="border-t border-[#d8d8d895] bg-white">
         <div className="container">
           <Message />
         </div>
