@@ -1,20 +1,19 @@
 import Video from "@/components/VideoBackground";
-import Nav from "@/components/Nav";
 
 import Story from "@/sections/Story";
 import Message from "@/sections/Message";
 import Hero from "@/sections/Hero";
 import Intro from "@/sections/Intro";
 import Info from "@/sections/Info";
+import Program from "@/sections/Program";
 
-// import Image from "next/image";
-// import banner_one from "@p/images/photoshoot/banner_one.webp";
-// import banner_one_mobile from "@p/images/photoshoot/banner_one_mobile.jpg";
+import Image from "next/image";
+import banner_one from "@p/images/photoshoot/banner_one.webp";
+import banner_one_mobile from "@p/images/photoshoot/banner_one_mobile.jpg";
 
 export default function Home() {
   return (
     <>
-      <Nav />
       <main className="min-h-[100svh]">
         <div className="flex-col-bot relative h-[100svh]">
           <Video />
@@ -23,8 +22,9 @@ export default function Home() {
         <div className="container flex flex-col gap-[4rem]">
           <Intro />
           <Info />
+          <Program />
         </div>
-        {/* <div className="h-[60svh]">
+        <div className="h-[60svh]">
           <Image
             src={banner_one}
             alt="King and Kim monogram"
@@ -35,7 +35,7 @@ export default function Home() {
             alt="King and Kim monogram"
             className="flex h-full w-full object-cover object-top sm:hidden"
           />
-        </div> */}
+        </div>
         <div className="container flex flex-col gap-[4rem]">
           <Story />
         </div>

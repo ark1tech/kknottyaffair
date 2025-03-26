@@ -5,50 +5,62 @@ import monogram from "@p/images/monogram_cropped.png";
 
 import { cn } from "@/lib/utils";
 
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Nav() {
-  const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [shouldShow, setShouldShow] = useState(false);
 
   const navItems = [
-    { label: "Home", href: "#" },
+    { label: "Home", href: "/" },
     { label: "Program", href: "#" },
     { label: "FAQs", href: "#" },
-    { label: "Gallery", href: "#" },
+    { label: "Gallery", href: "/gallery" },
     { label: "RSVP", href: "#" },
   ] as const;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const shouldShow = window.scrollY > window.innerHeight * 0.05;
-      setIsVisible(shouldShow);
-    };
+  const pathname = usePathname();
 
+  useLayoutEffect(() => {
+    if (pathname !== "/") {
+      setShouldShow(true);
+      return;
+    }
+    const handleScroll = () => {
+      setShouldShow(window.scrollY > window.innerHeight * 0.05);
+    };
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <>
       <nav
         className={cn(
-          "fixed top-0 right-0 left-0 z-50 bg-white shadow-xl transition-transform duration-300",
-          isVisible ? "translate-y-0" : "-translate-y-full"
+          "fixed top-0 right-0 left-0 z-50 bg-[#f4f1d8] shadow-xl transition-transform duration-300",
+          shouldShow ? "translate-y-0" : "-translate-y-full"
         )}
       >
-        <div className="nav-container flex flex-row items-center justify-between py-4">
+        <div
+          className={cn(
+            "nav-container flex flex-row items-center justify-between py-4",
+            "before:absolute before:inset-0 before:bg-[url('/images/paper-texture.jpg')] before:bg-repeat before:opacity-100 before:mix-blend-overlay before:content-['']"
+          )}
+        >
           <div className="flex flex-row items-center gap-[0.5rem]">
             <Image
               src={monogram}
               alt="King and Kim monogram"
-              className="h-auto w-[40px]"
+              className="relative h-auto w-[40px]"
             />
-            <h4 className="w-full font-title-cursive font-[900] text-primary">
+            <h4 className="deboss w-full font-title-cursive font-[900] text-primary-light">
               King and Kim
             </h4>
           </div>
-          <div className="hidden grow flex-row items-center justify-end gap-6 md:flex">
+          <div className="deboss hidden grow flex-row items-center justify-end gap-6 md:flex">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -62,7 +74,7 @@ export default function Nav() {
           <div className="flex justify-end md:hidden">
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="nav-text transition-all duration-100 hover:font-[500] hover:text-primary"
+              className="deboss nav-text transition-all duration-100 hover:font-[500] hover:text-primary"
             >
               Menu
             </button>
@@ -76,6 +88,7 @@ export default function Nav() {
         )}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="menu-heading"
       >
         <div className="flex flex-col items-end gap-6 px-[1.5rem] pt-6 padding:px-[0rem]">
           <button

@@ -3,7 +3,9 @@
 export default function Story() {
   return (
     <div className="gap-title readable-container flex flex-col">
-      <h3 className="font-title-sans text-primary-light">Our Story</h3>
+      <h2 className="deboss font-title-cursive font-[800] text-primary-light">
+        Our Story
+      </h2>
       <div className="gap-paragraph flex flex-col">
         {/* Highschool Photos */}
         <p>

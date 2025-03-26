@@ -9,6 +9,7 @@ import {
 } from "next/font/google";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
+import Nav from "@/components/Nav";
 
 // TAN Memories
 
@@ -70,6 +71,7 @@ export default function RootLayout({
       <body
         className={`${workSans.variable} ${geistMono.variable} ${titleCursive.variable} ${titleGothic.variable} ${cedarvilleCursive.variable} ${garamondSerif.variable} ${crimsonSerif.variable} ${titleCustom.variable}antialiased`}
       >
+        <Nav />
         {children}
       </body>
     </html>

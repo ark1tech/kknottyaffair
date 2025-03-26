@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* @plugin "tailwindcss-animate"; */
-@plugin "tailwindcss-motion";
-
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
@@ -23,16 +20,18 @@
   /* Font Sizes */
 
   --text-heading-xl: 52px;
-  --text-heading-l: 36px;
+  --text-heading-l: 32px;
   --text-heading-m: 24px;
-  --text-heading-s: 18px;
+  --text-heading-s: 24px;
+  --text-heading-xs: 20px;
+  --text-heading-xxs: 16px;
 
   --text-sub-m: 22px;
   --text-sub-s: 16px;
   --text-sub-xs: 14px;
 
-  --text-body-l: 22px;
-  --text-body-m: 20px;
+  --text-body-l: 20px;
+  --text-body-m: 18px;
   --text-body-s: 18px;
   --text-body-xs: 16px;
 
@@ -109,16 +108,13 @@
     @apply text-heading-l sm:text-heading-xl;
   }
   h2 {
-    @apply text-heading-m sm:text-heading-l;
+    @apply text-heading-s sm:text-heading-m md:text-heading-l;
   }
   h3 {
-    @apply font-title-fancy text-heading-s sm:text-heading-m;
+    @apply text-heading-xs sm:text-heading-s md:text-heading-m;
   }
   h4 {
-    @apply text-sub-s sm:text-heading-m;
-  }
-  h4 {
-    @apply text-sub-xs sm:text-heading-s;
+    @apply text-heading-xxs sm:text-heading-xxs md:text-heading-xs;
   }
 
   h1,
@@ -138,22 +134,6 @@
 }
 
 @layer utilities {
-  /* .mask-gradient {
-    --bottom: black 40%;
-    --top: transparent 100%;
-
-    mask-image: linear-gradient(to bottom, var(--bottom), var(--top));
-    -webkit-mask-image: linear-gradient(to bottom, var(--bottom), var(--top));
-  }
-
-  .mask-fade-both {
-    @apply [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_20%,black_80%,transparent_100%)] [mask-image:linear-gradient(to_bottom,transparent_0%,black_20%,black_80%,transparent_100%)];
-  }
-
-  .blur-gradient {
-    @apply [background-image:linear-gradient(to_bottom,white_0%,transparent_20%,transparent_80%,white_100%)];
-  } */
-
   .debug {
     @apply !border-[2px] !border-red-500;
   }
@@ -186,22 +166,34 @@
   }
 
   .link-underline {
-    @apply relative after:absolute after:bottom-[-2px] after:left-0 after:h-[1px] after:w-full after:bg-current after:transition-transform hover:after:scale-x-110;
+    @apply relative after:absolute after:bottom-[-1px] after:left-0 after:h-[1px] after:w-full after:bg-current after:transition-transform hover:after:scale-x-105;
+  }
+
+  .image-grid {
+    @apply hover:scale-105 transition-transform 
   }
 
   .magic-text {
     /* animation: background-pan 4s linear infinite; */
-    background: linear-gradient(
-      to bottom right,
-      var(--color-background-light),
-      var(--color-secondary),
-      var(--color-secondary-light)
-    );
-    background-size: 200%;
+    background:
+      linear-gradient(
+        to bottom right,
+        var(--color-background-light),
+        var(--color-secondary),
+        var(--color-secondary-light)
+      ),
+      url("/images/paper-texture.jpg");
+    background-size: 200%, 50%;
+    background-blend-mode: multiply;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     white-space: nowrap;
+    @apply saturate-500;
+  }
+
+  .deboss {
+    @apply relative [text-shadow:0px_1px_1px_rgba(255,255,255,0.5),0px_-1px_1px_rgba(10,10,10,0.3)];
   }
 }
 
