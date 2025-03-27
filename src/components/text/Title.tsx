@@ -8,10 +8,7 @@ interface TitleProps {
 export default function Title({ children, className = "" }: TitleProps) {
   return (
     <h1
-      className={cn(
-        "deboss font-title-cursive font-[800] text-primary-light",
-        className
-      )}
+      className={cn("deboss font-title-cursive text-primary-light font-[800]", className)}
     >
       {children}
     </h1>

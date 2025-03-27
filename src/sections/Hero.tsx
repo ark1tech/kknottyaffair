@@ -1,8 +1,9 @@
 
 import FadeIn from "@/components/FadeIn";
+import Link from "next/link";
 
 export default function Hero() {
-  return (
+return (
     <>
       <div className="flex-col-center hero-style relative z-10 mt-[2.5svh] h-fit w-fit gap-[1.25rem] pb-[4rem]">
         <FadeIn>
@@ -17,8 +18,9 @@ export default function Hero() {
         </FadeIn>
         <FadeIn delay={0.2}>
           <div className="flex-row-center flex scale-90 gap-[1rem]">
-            <p className="link-underline font-serif">RSVP</p>
-            <p className="link-underline font-serif">Watch the Video</p>
+            <Link className="link-underline font-serif" href="/">RSVP</Link>
+            <Link className="link-underline font-serif" href="/">Invitation</Link>
+            <Link className="link-underline font-serif" href="/gallery/video">Watch the Video</Link>
           </div>
         </FadeIn>
       </div>

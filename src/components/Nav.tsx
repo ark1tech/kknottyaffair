@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import monogram from "@p/images/monogram_cropped.png";
 
 import { cn } from "@/lib/utils";
@@ -13,11 +14,15 @@ export default function Nav() {
   const [shouldShow, setShouldShow] = useState(false);
 
   const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Program", href: "#" },
-    { label: "FAQs", href: "#" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "RSVP", href: "#" },
+    { label: "Home", href: "/", style: "" },
+    { label: "Program", href: "#", style: "" },
+    { label: "FAQs", href: "/FAQs", style: "" },
+    { label: "Gallery", href: "/gallery", style: "" },
+    {
+      label: "RSVP",
+      href: "#",
+      style: "font-[500] text-primary-light brightness-70",
+    },
   ] as const;
 
   const pathname = usePathname();
@@ -46,7 +51,7 @@ export default function Nav() {
       >
         <div
           className={cn(
-            "nav-container flex flex-row items-center justify-between py-4",
+            "nav-container flex h-[8dvh] flex-row items-center justify-between py-4 md:h-[10dvh]",
             "before:absolute before:inset-0 before:bg-[url('/images/paper-texture.jpg')] before:bg-repeat before:opacity-100 before:mix-blend-overlay before:content-['']"
           )}
         >
@@ -62,13 +67,16 @@ export default function Nav() {
           </div>
           <div className="deboss hidden grow flex-row items-center justify-end gap-6 md:flex">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
-                className="nav-text transition-all duration-100 hover:font-[500] hover:text-primary"
+                className={cn(
+                  `nav-text transition-all duration-100 hover:font-[500] hover:text-primary ${item.style}`,
+                  pathname === item.href ? "underline underline-offset-3" : ""
+                )}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="flex justify-end md:hidden">
@@ -93,19 +101,22 @@ export default function Nav() {
         <div className="flex flex-col items-end gap-6 px-[1.5rem] pt-6 padding:px-[0rem]">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="nav-text transition-all duration-100 hover:font-[500] hover:text-primary"
+            className="nav-text text-primary/60 transition-all duration-100 hover:font-[500] hover:text-primary/70"
           >
             Close
           </button>
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
-              className="nav-text transition-all duration-100 hover:font-[500] hover:text-primary"
+              className={cn(
+                `nav-text transition-all duration-100 hover:font-[500] hover:text-primary ${item.style}`,
+                pathname === item.href ? "underline underline-offset-2" : ""
+              )}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>

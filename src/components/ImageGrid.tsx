@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageModal from "@/components/ImageModal";
 
 interface GalleryProps {
   images: string[];
@@ -17,26 +17,25 @@ export default function Gallery({ images, rows, classMap = {} }: GalleryProps) {
 
   return (
     <div className="mb-[1rem] grid w-full gap-4 md:grid-cols-1">
-      <div className="relative h-[750px] overflow-hidden">
-        <Image
-          priority
+      <div className="relative h-[400px] w-full overflow-hidden sm:h-[750px]">
+        <ImageModal
           src={mainImage}
           alt="Main"
-          fill
-          className={`object-cover image-grid ${classMap[0] || ""}`}
+          className={`${classMap[0] || ""}`}
         />
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {sideImages.map((image, index) => {
           const additionalClass = classMap[index + 1] || "";
           return (
-            <div key={index} className="relative h-[750px] overflow-hidden">
-              <Image
-                priority
+            <div
+              key={index}
+              className="relative h-[400px] overflow-hidden sm:h-[750px]"
+            >
+              <ImageModal
                 src={image}
                 alt={`Gallery ${index + 1}`}
-                fill
-                className={`object-cover image-grid ${additionalClass}`}
+                className={`${additionalClass}`}
               />
             </div>
           );

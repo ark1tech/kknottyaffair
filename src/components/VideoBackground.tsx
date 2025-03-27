@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import BlurIn from "@/components/BlurIn";
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -62,7 +63,8 @@ export default function Video() {
           <source src="/videos/idk.mp4#t=15" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80"></div>
+        <BlurIn className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80">
+        </BlurIn>
       </div>
     </div>
   );

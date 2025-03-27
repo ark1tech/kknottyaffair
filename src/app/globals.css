@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
@@ -97,6 +98,10 @@
   .hero-heading {
     @apply text-5xl xs:text-7xl md:text-[7rem];
   }
+
+  .hero-heading-smaller {
+    @apply text-3xl xs:text-5xl md:text-[5rem];
+  }
   .hero-subheading {
     @apply text-body-s xs:text-2xl sm:text-3xl md:text-3xl;
   }
@@ -166,11 +171,15 @@
   }
 
   .link-underline {
-    @apply relative after:absolute after:bottom-[-1px] after:left-0 after:h-[1px] after:w-full after:bg-current after:transition-transform hover:after:scale-x-105;
+    @apply cursor-pointer relative after:absolute after:bottom-[-1px] after:left-0 after:h-[1px] after:w-full after:bg-current after:transition-transform hover:after:scale-x-105;
+  }
+
+  .faq-link {
+    @apply text-primary-light underline underline-offset-2 hover:text-secondary;
   }
 
   .image-grid {
-    @apply hover:scale-105 transition-transform 
+    @apply transition-transform hover:scale-105;
   }
 
   .magic-text {
@@ -188,8 +197,11 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    white-space: nowrap;
     @apply saturate-500;
+  }
+
+  .bold-text {
+    @apply font-[500] text-primary;
   }
 
   .deboss {
