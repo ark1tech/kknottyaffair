@@ -18,7 +18,7 @@ const FadeIn = ({
     initial={{ opacity: 0, y: 40 }}
     whileInView={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -40 }}
-    viewport={{ once: false }}
+    viewport={{ once: true }}
     transition={{ duration: 0.7, delay }}
   >
     {children}
