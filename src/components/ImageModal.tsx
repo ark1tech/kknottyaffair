@@ -32,20 +32,25 @@ export default function ImageModal({ src, alt, className }: ImageModalProps) {
     };
 
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      const scrollY = window.scrollY;
       document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflowY = "hidden";
+
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscapeKey);
     } else {
-      document.body.style.overflow = "";
+      const scrollY = document.body.style.top;
       document.body.style.position = "";
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflowY = "";
+      if (scrollY) {
+        window.scrollTo(0, Number.parseInt(scrollY || "0", 10) * -1);
+      }
     }
-
     return () => {
-      document.body.style.overflow = "";
-      document.body.style.position = "";
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscapeKey);
     };
@@ -72,7 +77,7 @@ export default function ImageModal({ src, alt, className }: ImageModalProps) {
               width={1000}
               height={1000}
               sizes="50vw"
-              className="max-h-[80dvh] md:max-h-[90dvh] max-w-[90dvw] object-contain"
+              className="max-h-[80dvh] max-w-[90dvw] object-contain md:max-h-[90dvh]"
             />
           </div>
           <button
