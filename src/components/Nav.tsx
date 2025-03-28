@@ -20,7 +20,7 @@ export default function Nav() {
     { label: "Gallery", href: "/gallery", style: "" },
     {
       label: "RSVP",
-      href: "#",
+      href: "/RSVP",
       style: "font-[500] text-primary-light brightness-70",
     },
   ] as const;

@@ -33,16 +33,19 @@ export default function ImageModal({ src, alt, className }: ImageModalProps) {
 
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscapeKey);
     } else {
       document.body.style.overflow = "";
+      document.body.style.position = "";
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscapeKey);
     }
 
     return () => {
       document.body.style.overflow = "";
+      document.body.style.position = "";
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscapeKey);
     };
