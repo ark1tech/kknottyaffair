@@ -5,13 +5,23 @@ import {
   AccordionTrigger,
 } from "@/components/Accordion";
 
-export default function Gallery() {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FAQs | Kim & King's Wedding",
+  description: "FAQs of Kim & King's Wedding",
+};
+
+export default function FAQs() {
   const faqs = [
     {
       question: "How do I RSVP?",
       answer: `
       You can find the RSVP button in the website, or by simply clicking 
-        <a href="" class="font-[500] hover:underline hover:underline-offset-2 text-primary-light brightness-95 mr-[-0.1rem]">
+        <a class="font-[500] hover:underline hover:underline-offset-2 text-primary-light brightness-95 mr-[-0.1rem]" 
+        href="https://kknottyaffair.anrsvp.com/#home"
+        target="_blank"
+        rel="noopener noreferrer">
           here
         </a>. Please RSVP by filling out the form with your name.
       `,
@@ -83,16 +93,15 @@ export default function Gallery() {
     },
     {
       question: "How do I get around?",
-      answer:
-        `We recommend bringing your own car due to the lack of taxis in Cabanatuan City, but if you are not able to find parking spaces, <span class="bold-text">tricycles</span> are also a viable choice.`,
+      answer: `We recommend bringing your own car due to the lack of taxis in Cabanatuan City, but if you are not able to find parking spaces, <span class="bold-text">tricycles</span> are also a viable choice.`,
     },
   ];
 
   return (
     <main className="mt-[8dvh] min-h-[90dvh] w-full md:mt-[10dvh]">
       <div className="container">
-        <div className="mt-[-1rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1rem] saturate-150 md:mt-[-1rem] md:mb-[2.5rem]">
-          <h1 className="hero-heading-smaller deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500]">
+        <div className="mt-[-1rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1rem] saturate-200 md:mt-[-1rem] md:mb-[2.5rem]">
+          <h1 className="hero-heading-smaller deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
             Frequently Asked Questions
           </h1>
           <h3 className="deboss mt-[-2.5rem] text-center font-serif font-[400] text-primary/80 italic">

@@ -14,15 +14,10 @@ export default function Nav() {
   const [shouldShow, setShouldShow] = useState(false);
 
   const navItems = [
-    { label: "Home", href: "/", style: "" },
-    { label: "Program", href: "#", style: "" },
-    { label: "FAQs", href: "/FAQs", style: "" },
-    { label: "Gallery", href: "/gallery", style: "" },
-    {
-      label: "RSVP",
-      href: "/RSVP",
-      style: "font-[500] text-primary-light brightness-70",
-    },
+    { label: "Home", href: "/" },
+    { label: "FAQs", href: "/FAQs" },
+    { label: "Invitation", href: "/invitation" },
+    { label: "Gallery", href: "/gallery" },
   ] as const;
 
   const pathname = usePathname();
@@ -70,14 +65,23 @@ export default function Nav() {
               <Link
                 key={item.label}
                 href={item.href}
+                prefetch={item.href === "/gallery"}
                 className={cn(
-                  `nav-text transition-all duration-100 hover:font-[500] hover:text-primary ${item.style}`,
+                  `nav-text transition-all duration-100 hover:text-primary-light`,
                   pathname === item.href ? "underline underline-offset-3" : ""
                 )}
               >
                 {item.label}
               </Link>
             ))}
+            <a
+              href="https://kknottyaffair.anrsvp.com/#home"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-text font-[600] text-primary brightness-70 transition-all duration-100 hover:text-primary-light"
+            >
+              RSVP
+            </a>
           </div>
           <div className="flex justify-end md:hidden">
             <button
@@ -91,7 +95,7 @@ export default function Nav() {
       </nav>
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-60 h-full w-[65%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden",
+          "fixed inset-y-0 right-0 z-60 h-full w-[45%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden",
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
         role="dialog"
@@ -101,7 +105,7 @@ export default function Nav() {
         <div className="flex flex-col items-end gap-6 px-[1.5rem] pt-6 padding:px-[0rem]">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="nav-text text-primary/60 transition-all duration-100 hover:font-[500] hover:text-primary/70"
+            className="nav-text cursor-pointer text-primary/60 transition-all duration-100 hover:font-[500] hover:text-primary/70"
           >
             Close
           </button>
@@ -111,13 +115,21 @@ export default function Nav() {
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
               className={cn(
-                `nav-text transition-all duration-100 hover:font-[500] hover:text-primary ${item.style}`,
+                `nav-text font-[500] transition-all duration-100 hover:text-primary-light`,
                 pathname === item.href ? "underline underline-offset-2" : ""
               )}
             >
               {item.label}
             </Link>
           ))}
+          <a
+            href="https://kknottyaffair.anrsvp.com/#home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-text font-[600] text-primary brightness-70 transition-all duration-100 hover:text-primary-light"
+          >
+            RSVP
+          </a>
         </div>
       </div>
 

@@ -8,7 +8,7 @@ export default function Gallery() {
           </h1>
           <h3 className="deboss mt-[-2rem] text-center font-serif font-[400] text-primary/80 italic">
             Through the Lens of Love
-          </h3>
+          </h3> 
         </div>
       </div>
     </main>

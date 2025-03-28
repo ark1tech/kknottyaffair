@@ -8,8 +8,13 @@ import Info from "@/sections/Info";
 import Program from "@/sections/Program";
 
 import Image from "next/image";
-import banner_one from "@p/images/photoshoot/banner_one.webp";
-import banner_one_mobile from "@p/images/photoshoot/banner_one_mobile.jpg";
+import banner_story from "@p/images/photoshoot/banner_story.webp";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kim & King's Wedding",
+  description: "Pre-wedding Gallery of Kim & King",
+};
 
 export default function Home() {
   return (
@@ -24,16 +29,13 @@ export default function Home() {
           <Info />
           <Program />
         </div>
-        <div className="h-[60svh]">
+        <div className="h-[30dvh] sm:h-[50dvh] md:h-[70dvh]">
           <Image
-            src={banner_one}
-            alt="King and Kim monogram"
-            className="hidden h-full w-full object-cover object-top sm:flex"
-          />
-          <Image
-            src={banner_one_mobile}
-            alt="King and Kim monogram"
-            className="flex h-full w-full object-cover object-top sm:hidden"
+            src={banner_story}
+            placeholder="blur"
+            alt="Banner Wedding story"
+            sizes="100vw"
+            className="object-[20%_63%] h-full w-full object-cover"
           />
         </div>
         <div className="container flex flex-col gap-[4rem]">

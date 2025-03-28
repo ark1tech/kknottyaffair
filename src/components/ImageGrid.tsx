@@ -1,42 +1,56 @@
 import ImageModal from "@/components/ImageModal";
+import Image, { StaticImageData } from "next/image";
 
 interface GalleryProps {
-  images: string[];
+  images: StaticImageData[];
   rows: number;
   classMap?: Record<number, string>;
 }
 
-export default function Gallery({ images, rows, classMap = {} }: GalleryProps) {
-  if (images.length < rows * 2 + 1) {
-    console.error("Not enough images for the specified number of rows");
-    return null;
-  }
-
+export default function ImageGrid({
+  images,
+  rows,
+  classMap = {},
+}: GalleryProps) {
   const mainImage = images[0];
   const sideImages = images.slice(1, rows * 2 + 1);
 
   return (
     <div className="mb-[1rem] grid w-full gap-4 md:grid-cols-1">
-      <div className="relative h-[400px] w-full overflow-hidden sm:h-[750px]">
-        <ImageModal
+      <ImageModal
+        src={mainImage}
+        alt="Featured wedding photograph"
+        className="relative h-[400px] w-full overflow-hidden sm:h-[750px]"
+      >
+        <Image
           src={mainImage}
-          alt="Main"
-          className={`${classMap[0] || ""}`}
+          alt="Featured wedding photograph"
+          fill
+          sizes="100vh"
+          priority
+          placeholder="blur"
+          className={`image-grid object-cover ${classMap[0] || ""}`}
         />
-      </div>
+      </ImageModal>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {sideImages.map((image, index) => {
-          const additionalClass = classMap[index + 1] || "";
           return (
-            <div
-              key={index}
-              className="relative h-[400px] overflow-hidden sm:h-[750px]"
-            >
+            <div key={index}>
               <ImageModal
                 src={image}
-                alt={`Gallery ${index + 1}`}
-                className={`${additionalClass}`}
-              />
+                alt={`Wedding photograph ${index + 1} in the gallery collection`}
+                className="relative h-[400px] overflow-hidden sm:h-[750px]"
+              >
+                <Image
+                  src={image}
+                  alt={`Wedding photograph ${index + 1} in the gallery collection`}
+                  fill
+                  sizes="100vh"
+                  priority
+                  placeholder="blur"
+                  className={`image-grid object-cover ${classMap[index + 1] || ""}`}
+                />
+              </ImageModal>
             </div>
           );
         })}

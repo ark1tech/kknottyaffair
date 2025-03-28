@@ -1,14 +1,21 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import { motion } from "framer-motion";
 
 interface ImageModalProps {
-  src: string;
+  src: StaticImageData;
   alt: string;
+  children: React.ReactNode;
   className?: string;
 }
 
-export default function ImageModal({ src, alt, className }: ImageModalProps) {
+export default function ImageModal({
+  src,
+  alt,
+  children,
+  className = "",
+}: ImageModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -58,35 +65,32 @@ export default function ImageModal({ src, alt, className }: ImageModalProps) {
 
   return (
     <>
-      <div onClick={openModal} className={`cursor-pointer`}>
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority
-          className={`image-grid object-cover ${className}`}
-        />
+      <div onClick={openModal} className={`cursor-pointer ${className}`}>
+        {children}
       </div>
 
       {isOpen && (
-        <div className="bg-opacity-75 fixed inset-0 z-50 flex items-center justify-center bg-black/90">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+          className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+        >
           <div ref={modalRef} className="relative">
             <Image
               src={src}
               alt={alt}
-              width={1000}
-              height={1000}
-              sizes="50vw"
-              className="max-h-[80dvh] max-w-[90dvw] object-contain md:max-h-[90dvh]"
+              priority
+              className="max-h-[80dvh] max-w-[90dvw] object-contain md:max-h-[90dvh] md:max-w-[70dvw]"
             />
           </div>
           <button
             onClick={closeModal}
-            className="absolute top-0 right-0 m-[1.5rem] cursor-pointer font-serif text-white shadow-md"
+            className="absolute top-0 right-0 m-[1.6rem] cursor-pointer font-serif text-white drop-shadow-lg hover:underline hover:underline-offset-2 md:right-[6rem]"
           >
             Close
           </button>
-        </div>
+        </motion.div>
       )}
     </>
   );
