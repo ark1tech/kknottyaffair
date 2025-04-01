@@ -2,7 +2,9 @@ import ImageGrid from "@/components/ImageGrid";
 import Link from "next/link";
 import IMAGE_GALLERY from "@/constants/gallery";
 import { getImageGroup } from "@/lib/utils";
+import Image from "next/image";
 import type { Metadata } from "next";
+import leaf_bg from "@p/backgrounds/leaf_bg_3.svg";
 
 export const metadata: Metadata = {
   title: "Gallery | Kim & King's Wedding",
@@ -11,7 +13,15 @@ export const metadata: Metadata = {
 
 export default function Gallery() {
   return (
-    <main className="mt-[8dvh] min-h-[90dvh] w-full md:mt-[10dvh]">
+    <main className="min-h-[90dvh] w-full pt-[8dvh] md:pt-[10dvh]">
+      <div className="absolute w-full">
+        <Image
+          src={leaf_bg}
+          sizes="100vh"
+          alt="background"
+          className="w-full"
+        />
+      </div>
       <div className="container">
         <div className="mt-[-1.5rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1.25rem] saturate-200 md:mt-[-2rem] md:mb-[2.5rem]">
           <h1 className="hero-heading deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
@@ -21,7 +31,7 @@ export default function Gallery() {
             Through the Lens of Love
           </h3>
           <span className="flex-col-center mt-[-0.25rem] opacity-50">
-            <Link className="link-underline" href="/gallery/video">
+            <Link className="link-underline" href="/gallery/pre-wedding-video">
               Watch the pre-wedding video
             </Link>
           </span>
@@ -58,7 +68,7 @@ export default function Gallery() {
           images={getImageGroup(15, 20, IMAGE_GALLERY)}
           rows={2}
           classMap={{
-            1: "object-[10%]"
+            1: "object-[10%]",
           }}
         />
         <ImageGrid
@@ -85,9 +95,7 @@ export default function Gallery() {
         <ImageGrid
           images={getImageGroup(35, 40, IMAGE_GALLERY)}
           rows={2}
-          classMap={{
-            
-          }}
+          classMap={{}}
         />
         <ImageGrid
           images={getImageGroup(40, 49, IMAGE_GALLERY)}

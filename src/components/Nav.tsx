@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import monogram from "@p/images/monogram_cropped.png";
+import monogram_cropped from "@p/images/monogram_cropped.png";
+import monogram from "@p/images/monogram.png";
 
 import { cn } from "@/lib/utils";
 
@@ -14,16 +15,16 @@ export default function Nav() {
   const [shouldShow, setShouldShow] = useState(false);
 
   const navItems = [
-    { label: "Home", href: "/" },
-    { label: "FAQs", href: "/FAQs" },
-    { label: "Invitation", href: "/invitation" },
-    { label: "Gallery", href: "/gallery" },
+    { label: "Home", href: "/", path: "/home" },
+    { label: "FAQs", href: "/FAQs", path: "/FAQs" },
+    { label: "Invitation", href: "/invitation", path: "/invitation" },
+    { label: "Gallery", href: "/gallery", path: "/gallery" },
   ] as const;
 
   const pathname = usePathname();
 
   useLayoutEffect(() => {
-    if (pathname !== "/") {
+    if (pathname !== "/" && pathname !== "/home") {
       setShouldShow(true);
       return;
     }
@@ -40,9 +41,14 @@ export default function Nav() {
     <>
       <nav
         className={cn(
-          "fixed top-0 right-0 left-0 z-50 bg-[#f4f1d8] shadow-xl transition-transform duration-300",
-          shouldShow ? "translate-y-0" : "-translate-y-full"
+          "nav-shadow fixed top-0 right-0 left-0 z-50 bg-[#f4f1d8] transition-transform duration-300"
         )}
+        style={{
+          transform: shouldShow ? "translateY(0)" : "translateY(-100%)",
+          boxShadow: "0px 10px 20px #00000020",
+          WebkitBoxShadow: "0px 10px 20px #00000020",
+          MozBoxShadow: "0px 10px 20px #00000020",
+        }}
       >
         <div
           className={cn(
@@ -52,7 +58,7 @@ export default function Nav() {
         >
           <div className="flex flex-row items-center gap-[0.5rem]">
             <Image
-              src={monogram}
+              src={monogram_cropped}
               alt="King and Kim monogram"
               className="relative h-auto w-[40px]"
             />
@@ -68,7 +74,9 @@ export default function Nav() {
                 prefetch={item.href === "/gallery"}
                 className={cn(
                   `nav-text transition-all duration-100 hover:text-primary-light`,
-                  pathname === item.href ? "underline underline-offset-3" : ""
+                  pathname.startsWith(`${item.path}/`) || pathname === item.path
+                    ? "underline underline-offset-3"
+                    : ""
                 )}
               >
                 {item.label}
@@ -78,7 +86,7 @@ export default function Nav() {
               href="https://kknottyaffair.anrsvp.com/#home"
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-text font-[600] text-primary brightness-70 transition-all duration-100 hover:text-primary-light"
+              className="nav-text font-[600] text-primary-light brightness-70 transition-all duration-100 hover:brightness-115"
             >
               RSVP
             </a>
@@ -86,7 +94,7 @@ export default function Nav() {
           <div className="flex justify-end md:hidden">
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="deboss nav-text transition-all duration-100 hover:font-[500] hover:text-primary"
+              className="deboss nav-text cursor-pointer transition-all duration-100 hover:font-[500] hover:text-primary"
             >
               Menu
             </button>
@@ -95,9 +103,9 @@ export default function Nav() {
       </nav>
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-60 h-full w-[45%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden",
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
+          "fixed inset-y-0 right-0 z-60 h-full w-[45%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden"
         )}
+        style={{ transform: isMenuOpen ? "translateX(0)" : "translateX(100%)" }}
         role="dialog"
         aria-modal="true"
         aria-labelledby="menu-heading"
@@ -105,7 +113,7 @@ export default function Nav() {
         <div className="flex flex-col items-end gap-6 px-[1.5rem] pt-6 padding:px-[0rem]">
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="nav-text cursor-pointer text-primary/60 transition-all duration-100 hover:font-[500] hover:text-primary/70"
+            className="nav-text deboss cursor-pointer text-[#454b1b7a] transition-all duration-100 hover:brightness-115"
           >
             Close
           </button>
@@ -115,8 +123,10 @@ export default function Nav() {
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
               className={cn(
-                `nav-text font-[500] transition-all duration-100 hover:text-primary-light`,
-                pathname === item.href ? "underline underline-offset-2" : ""
+                `nav-text transition-all duration-100 hover:text-primary-light`,
+                pathname.startsWith(`${item.path}/`) || pathname === item.path
+                  ? "underline underline-offset-3"
+                  : ""
               )}
             >
               {item.label}
@@ -126,10 +136,19 @@ export default function Nav() {
             href="https://kknottyaffair.anrsvp.com/#home"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-text font-[600] text-primary brightness-70 transition-all duration-100 hover:text-primary-light"
+            className="nav-text deboss font-[600] text-primary-light brightness-70 transition-all duration-100 hover:brightness-115"
           >
             RSVP
           </a>
+        </div>
+        <div className="flex h-full">
+          <Image
+            src={monogram}
+            alt="King and Kim monogram"
+            priority
+            sizes="20vh"
+            className="absolute bottom-0 scale-80 opacity-60 hover:brightness-150"
+          />
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 export default function Message() {
   return (
-    <div className=" py-[2rem] ">
+    <div className="py-[2rem]">
       <div className="gap-title readable-container flex flex-col">
         <h3 className="font-title-sans text-primary-light">
           Dear Family and Friends,
@@ -24,6 +24,16 @@ export default function Message() {
           </h3>
         </div>
       </div>
+      {/* <div className="flex-col-center">
+        <div className="wrapper">
+          <div className="lid one"></div>
+          <div className="lid two"></div>
+          <div className="envelope"></div>
+          <div className="letter">
+            <p>Hello</p>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 }

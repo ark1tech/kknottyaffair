@@ -30,7 +30,7 @@ export default function Invitation() {
                     alt={`Invitation ${index + 1} Modal`}
                     priority
                     placeholder="blur"
-                    className={`max-h-[60dvh] object-contain drop-shadow-[5px_5px_10px_rgba(0,0,0,0.25)] md:max-h-full`}
+                    className={`image-grid max-h-[60dvh] object-contain drop-shadow-[5px_5px_10px_rgba(0,0,0,0.25)] md:max-h-full`}
                   />
                 </ImageModal>
               </div>
@@ -43,7 +43,7 @@ export default function Invitation() {
               src={INVITATIONS[4]}
               alt={`Invitation 5 Modal`}
               priority
-              className={`object-contain drop-shadow-[5px_5px_10px_rgba(0,0,0,0.25)]`}
+              className={`image-grid object-contain drop-shadow-[5px_5px_10px_rgba(0,0,0,0.25)]`}
             />
           </ImageModal>
         </div>

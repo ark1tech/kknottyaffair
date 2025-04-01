@@ -1,16 +1,18 @@
 "use client";
 
 // import { useRef, useEffect } from "react";
+// import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
 
 export default function Video() {
   // const videoRef = useRef<HTMLVideoElement>(null);
+  // const { isSafari } = useBrowser();
 
   // useEffect(() => {
   //   const videoElement = videoRef.current;
 
   //   const handleUserInteraction = () => {
-  //     if (videoElement) {
+  //     if (videoElement && !isSafari) {
   //       videoElement.muted = false;
   //       fadeInAudio(videoElement);
   //     }
@@ -45,14 +47,39 @@ export default function Video() {
   //       videoElement.removeEventListener("touchstart", handleUserInteraction);
   //     }
   //   };
-  // }, []);
+  // }, [isSafari]);
 
   return (
-    <div className="absolute inset-0 z-0 h-[100dvh] w-full">
-      <div className="relative h-full w-full">
+    <div
+      style={{
+        overflowX: "hidden",
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 0,
+        height: "100vh",
+        width: "100%",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          height: "100%",
+          width: "100%",
+        }}
+      >
         <video
           // ref={videoRef}
-          className="h-full w-full object-cover object-center brightness-[85%]"
+          // className="h-full w-full object-cover object-center brightness-[85%]"
+          style={{
+            height: "100%",
+            width: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            filter: "brightness(85%)",
+          }}
           poster="images/photoshoot/main_bg.webp"
           autoPlay
           loop
@@ -60,10 +87,22 @@ export default function Video() {
           disablePictureInPicture
           playsInline
         >
-          <source src="/videos/idk.mp4#t=15" type="video/mp4" />
+          <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
           Your browser does not support the video tag.
         </video>
-        <BlurIn className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80"></BlurIn>
+        <BlurIn
+          style={{
+            pointerEvents: "none",
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            background:
+              "linear-gradient(to bottom, transparent -10%, black 110%)",
+            opacity: 0.8,
+          }}
+        ></BlurIn>
       </div>
     </div>
   );

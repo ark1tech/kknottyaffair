@@ -60,7 +60,7 @@ export default function Info() {
                   </p>
                 </div>
                 <a
-                  className="link-underline relative flex w-fit flex-row items-center font-sans text-footnote font-[500] text-[#8da184]"
+                  className="link-underline relative flex w-fit flex-row items-center hover:brightness-115 font-sans text-footnote font-[500] text-[#8da184]"
                   href={card.googleMapLink}
                   target="_blank"
                 >

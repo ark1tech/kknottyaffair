@@ -82,10 +82,10 @@ export default function FAQs() {
         <span class="flex flex-col gap-paragraph">
           <span>These are our recommended accommodations, each offering comfort and convenience for your stay</span>
           <ul class="list-disc pl-7">
-            <li><a href="https://maps.app.goo.gl/Wt5Cn76iguGLDigU6" target="_blank" rel="noopener noreferrer" class="faq-link">Microtel by Wyndham</a></li>
-            <li><a href="https://maps.app.goo.gl/Gc6dGmKG3UxE4R1n9" target="_blank" rel="noopener noreferrer" class="faq-link">The Quarters By Rosey</a></li>
-            <li><a href="https://maps.app.goo.gl/aH5GQMikbRUgFFph7" target="_blank" rel="noopener noreferrer" class="faq-link">Harvest Hotel</a></li>
-            <li><a href="https://maps.app.goo.gl/5HqtkL9VomX8ETm2A" target="_blank" rel="noopener noreferrer" class="faq-link">Amada Plaza</a></li>
+            <li><a href="https://maps.app.goo.gl/Wt5Cn76iguGLDigU6" target="_blank" rel="noopener noreferrer" class="faq-link">Microtel by Wyndham</a>  (Mabini St. Ext., Cabanatuan City) </li>
+            <li><a href="https://maps.app.goo.gl/Gc6dGmKG3UxE4R1n9" target="_blank" rel="noopener noreferrer" class="faq-link">The Quarters By Rosey</a> (St. Franciss St., Cabanatuan City)</li>
+            <li><a href="https://maps.app.goo.gl/aH5GQMikbRUgFFph7" target="_blank" rel="noopener noreferrer" class="faq-link">Harvest Hotel</a> (Del Pilar St., Cabanatuan City)</li>
+            <li><a href="https://maps.app.goo.gl/5HqtkL9VomX8ETm2A" target="_blank" rel="noopener noreferrer" class="faq-link">Amada Plaza</a> (Villaluz St., Cabanatuan City)</li>
             <li><a href="https://www.airbnb.com/s/Cabanatuan-City--Nueva-Ecija--Philippines/homes" target="_blank" rel="noopener noreferrer" class="faq-link">Airbnb</a></li>
           </ul>
         </span>
@@ -98,10 +98,22 @@ export default function FAQs() {
   ];
 
   return (
-    <main className="mt-[8dvh] min-h-[90dvh] w-full md:mt-[10dvh]">
+    <main
+      className="min-h-[90dvh] w-full pt-[8dvh] md:pt-[10dvh]"
+      style={{
+        backgroundImage: "url('/backgrounds/leaf_bg_2.svg')",
+        backgroundSize: "contain",
+        backgroundPosition: "top",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        backgroundBlendMode: "overlay",
+      }}
+    >
       <div className="container">
         <div className="mt-[-1rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1rem] saturate-200 md:mt-[-1rem] md:mb-[2.5rem]">
-          <h1 className="hero-heading-smaller deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
+          <h1
+            className="hero-heading-smaller deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]"
+          >
             Frequently Asked Questions
           </h1>
           <h3 className="deboss mt-[-2.5rem] text-center font-serif font-[400] text-primary/80 italic">

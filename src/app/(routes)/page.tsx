@@ -1,14 +1,4 @@
-import Video from "@/components/VideoBackground";
-
-import Story from "@/sections/Story";
-import Message from "@/sections/Message";
-import Hero from "@/sections/Hero";
-import Intro from "@/sections/Intro";
-import Info from "@/sections/Info";
-import Program from "@/sections/Program";
-
-import Image from "next/image";
-import banner_story from "@p/images/photoshoot/banner_story.webp";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,32 +9,20 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <main className="min-h-[100svh]">
-        <div className="flex-col-bot relative h-[100svh]">
-          <Video />
-          <Hero />
-        </div>
-        <div className="container flex flex-col gap-[4rem]">
-          <Intro />
-          <Info />
-          <Program />
-        </div>
-        <div className="h-[30dvh] sm:h-[50dvh] md:h-[70dvh]">
-          <Image
-            src={banner_story}
-            placeholder="blur"
-            alt="Banner Wedding story"
-            sizes="100vw"
-            className="object-[20%_63%] h-full w-full object-cover"
-          />
-        </div>
-        <div className="container flex flex-col gap-[4rem]">
-          <Story />
-        </div>
-      </main>
-      <main className="border-t border-[#d8d8d895] bg-white">
-        <div className="container">
-          <Message />
+      <main className="relative h-[100dvh] bg-[#f4f1d8] shadow-sm before:absolute before:inset-0 before:bg-[url('/images/paper-texture.jpg')] before:bg-cover before:opacity-100 before:mix-blend-overlay before:content-['']">
+        <div className="deboss flex-col-center relative container h-full">
+          <h1 className="deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%] mb-[-2rem]">
+            You&rsquo;re duly invited to
+          </h1>
+          <h1 className="hero-heading deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
+            Kim & King&rsquo;s Wedding
+          </h1>
+          <Link
+            href="/home"
+            className={`nav-text transition-all duration-100 hover:text-primary-light`}
+          >
+            Lets go!!!
+          </Link>
         </div>
       </main>
     </>

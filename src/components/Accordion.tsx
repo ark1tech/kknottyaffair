@@ -19,7 +19,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("border-b border-b-primary/20 last:border-b-0", className)}
+      className={cn("accordion-style", className)}
       {...props}
     />
   );
@@ -59,7 +59,7 @@ function AccordionContent({
       {...props}
     >
       <div className={cn("pt-0 pb-7", className)}>
-        <p className="text-text-primary/75 font-serif font-[350]">{children}</p>
+        <p className="font-serif font-[350] text-text-primary/75">{children}</p>
       </div>
     </AccordionPrimitive.Content>
   );
