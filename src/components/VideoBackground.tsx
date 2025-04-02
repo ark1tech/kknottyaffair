@@ -52,7 +52,7 @@ export default function Video() {
   return (
     <div
       style={{
-        overflowX: "hidden",
+        overflow: "hidden",
         position: "absolute",
         top: 0,
         right: 0,

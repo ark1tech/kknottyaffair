@@ -20,13 +20,15 @@ export default function Gallery() {
           src={leaf_bg}
           sizes="100vh"
           alt="background"
-          className="hidden w-full md:flex"
+          priority
+          className="show-md-up w-full"
         />
         <Image
           src={leaf_bg_mobile}
           sizes="100vh"
+          priority
           alt="background"
-          className="flex w-full md:hidden"
+          className="show-md-down w-full"
         />
       </div>
       <main className="relative min-h-[90dvh] w-full pt-[8dvh] md:pt-[10dvh]">

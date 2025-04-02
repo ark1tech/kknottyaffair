@@ -9,6 +9,9 @@ import Program from "@/sections/Program";
 
 import Image from "next/image";
 import banner_story from "@p/images/photoshoot/banner_story.webp";
+import side_leaf_1 from "@p/backgrounds/side_leaf_1.svg";
+import side_leaf_2 from "@p/backgrounds/side_leaf_2.svg";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,22 +23,44 @@ export default function Home() {
   return (
     <>
       <main className="min-h-[100svh]">
+        <div className="side-leaf-container">
+          <Image
+            src={side_leaf_1}
+            sizes="30vw"
+            alt="background"
+            priority
+            className="side-leaf-image"
+          />
+          <Image
+            src={side_leaf_2}
+            sizes="30vw"
+            alt="background"
+            priority
+            className="side-leaf-image"
+          />
+        </div>
         <div className="flex-col-bot relative h-[100svh]">
           <Video />
           <Hero />
         </div>
-        <div className="container flex flex-col gap-[4rem]">
+        <div className="relative container flex flex-col gap-[4rem]">
           <Intro />
           <Info />
+        </div>
+      </main>
+      <main className="relative mt-[-4rem]" style={{ overflow: "hidden" }}>
+        <div className="relative container flex flex-col gap-[4rem]">
           <Program />
         </div>
-        <div className="h-[30dvh] sm:h-[50dvh] md:h-[70dvh]">
+      </main>
+      <main>
+        <div className="banner-container">
           <Image
             src={banner_story}
             placeholder="blur"
             alt="Banner Wedding story"
             sizes="100vw"
-            className="object-[20%_63%] h-full w-full object-cover"
+            className="banner-image fade-from-top"
           />
         </div>
         <div className="container flex flex-col gap-[4rem]">

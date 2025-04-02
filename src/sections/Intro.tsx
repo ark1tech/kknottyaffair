@@ -25,11 +25,11 @@ export default function Intro() {
       </FadeIn>
 
       <FadeIn delay={0.35}>
-        <div className="mt-[3rem] mb-[1rem] flex flex-col gap-[2rem] text-center">
-          <Title>
-            Counting Down To &nbsp; Our Forever
-          </Title>
-          <CountdownTimer targetDate={new Date("2025-06-21T00:00:00")} />
+        <div className="fade-border-container mt-[3rem] mb-[1rem]">
+          <div className="flex flex-col gap-[2rem] text-center">
+            <Title>Counting Down To &nbsp; Our Forever</Title>
+            <CountdownTimer targetDate={new Date("2025-06-21T00:00:00")} />
+          </div>
         </div>
       </FadeIn>
     </div>

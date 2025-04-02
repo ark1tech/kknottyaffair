@@ -72,8 +72,8 @@ function calculateTimeLeft(targetDate: Date) {
 
 const TimeUnit = memo(({ value, label }: { value: number; label: string }) => (
   <div className="flex flex-col items-center">
-    <h1 className="font-serif">{value}</h1>
-    <p className="text-text-secondary">{label}</p>
+    <h1 className="font-serif text-[#432f0a]">{value}</h1>
+    <p className="text-[#432f0a]">{label}</p>
   </div>
 ));
 

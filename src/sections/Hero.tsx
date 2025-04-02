@@ -34,7 +34,7 @@ export default function Hero() {
             </Link>
             <Link
               className="link-underline font-serif text-[#ffffffc1] hover:text-secondary hover:brightness-130"
-              href="/gallery/video"
+              href="/gallery/pre-wedding-video"
             >
               Watch the Video
             </Link>

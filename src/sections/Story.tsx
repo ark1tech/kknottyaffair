@@ -1,11 +1,10 @@
 // import FadeIn from "@/components/FadeIn";
+import Title from "@/components/text/Title";
 
 export default function Story() {
   return (
     <div className="gap-title readable-container flex flex-col">
-      <h2 className="deboss font-title-cursive font-[800] text-primary-light">
-        Our Story
-      </h2>
+      <Title className="text-left">Our Story</Title>
       <div className="gap-paragraph flex flex-col">
         {/* Highschool Photos */}
         <p>
@@ -29,7 +28,10 @@ export default function Story() {
         </p>
         <p>
           As cliché as it may sound, their story unfolded as if the stars had
-          aligned, bringing them back together. Kim and King became a couple on
+          aligned, bringing them back together.
+        </p>
+        <p>
+          Kim and King became a couple on
           January 6, 2022, in Baguio City, and got officially engaged on June
           16, 2024, in Tagaytay City.
         </p>
