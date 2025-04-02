@@ -6,6 +6,9 @@ import {
 } from "@/components/Accordion";
 
 import type { Metadata } from "next";
+import Image from "next/image";
+import leaf_bg from "@p/backgrounds/leaf_bg_3.svg";
+import leaf_bg_mobile from "@p/backgrounds/leaf_bg_mobile.svg";
 
 export const metadata: Metadata = {
   title: "FAQs | Kim & King's Wedding",
@@ -98,45 +101,49 @@ export default function FAQs() {
   ];
 
   return (
-    <main
-      className="min-h-[90dvh] w-full pt-[8dvh] md:pt-[10dvh]"
-      style={{
-        backgroundImage: "url('/backgrounds/leaf_bg_2.svg')",
-        backgroundSize: "contain",
-        backgroundPosition: "top",
-        backgroundRepeat: "no-repeat",
-        backgroundColor: "rgba(255, 255, 255, 0.1)",
-        backgroundBlendMode: "overlay",
-      }}
-    >
-      <div className="container">
-        <div className="mt-[-1rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1rem] saturate-200 md:mt-[-1rem] md:mb-[2.5rem]">
-          <h1
-            className="hero-heading-smaller deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]"
-          >
-            Frequently Asked Questions
-          </h1>
-          <h3 className="deboss mt-[-2.5rem] text-center font-serif font-[400] text-primary/80 italic">
-            Kindly read through the information for a smooth attendance
-          </h3>
-        </div>
-        <div className="readable-container bg-background-light shadow-sm">
-          <Accordion
-            type="single"
-            collapsible
-            className="relative w-full p-[2rem]"
-          >
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{faq.question}</AccordionTrigger>
-                <AccordionContent>
-                  <span dangerouslySetInnerHTML={{ __html: faq.answer }} />
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+    <>
+      <div className="absolute w-full overflow-x-hidden z-0">
+        <Image
+          src={leaf_bg}
+          sizes="100vh"
+          alt="background"
+          className="hidden w-full md:flex"
+        />
+        <Image
+          src={leaf_bg_mobile}
+          sizes="100vh"
+          alt="background"
+          className="flex w-full md:hidden"
+        />
       </div>
-    </main>
+      <main className="relative min-h-[90dvh] w-full pt-[8dvh] md:pt-[10dvh]">
+        <div className="container">
+          <div className="mt-[-1rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1rem] saturate-200 md:mt-[-1rem] md:mb-[2.5rem]">
+            <h1 className="hero-heading-smaller deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
+              Frequently Asked Questions
+            </h1>
+            <h3 className="deboss mt-[-2.5rem] text-center font-serif font-[400] text-primary/80 italic">
+              Kindly read through the information for a smooth attendance
+            </h3>
+          </div>
+          <div className="readable-container bg-background-light shadow-sm">
+            <Accordion
+              type="single"
+              collapsible
+              className="relative w-full p-[2rem]"
+            >
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger>{faq.question}</AccordionTrigger>
+                  <AccordionContent>
+                    <span dangerouslySetInnerHTML={{ __html: faq.answer }} />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </main>
+    </>
   );
 }

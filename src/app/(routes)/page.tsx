@@ -21,7 +21,7 @@ export default function Home() {
             href="/home"
             className={`nav-text transition-all duration-100 hover:text-primary-light`}
           >
-            Lets go!!!
+            Enter Our Story
           </Link>
         </div>
       </main>

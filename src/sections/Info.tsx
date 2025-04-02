@@ -4,7 +4,12 @@ import FadeIn from "@/components/FadeIn";
 import Blob from "@/components/Blob";
 import PaperCard from "@/components/cards/PaperCard";
 
+import Image from "next/image";
+import church from "@p/backgrounds/church_bg.svg";
+import leticia from "@p/backgrounds/leticia_bg.svg";
+
 export default function Info() {
+  const bgImages = [church, leticia];
   const locationCards = [
     {
       type: "The Wedding Venue",
@@ -40,37 +45,73 @@ export default function Info() {
       <div className="flex flex-col justify-center gap-[0rem] md:flex-row md:gap-[2rem] lg:gap-[4rem]">
         {locationCards.map((card, index) => (
           <FadeIn key={index} delay={card.delay}>
-            <PaperCard
-              className={cn(
-                "gap-title flex w-full flex-col",
-                "px-6 py-8 md:px-10 md:py-12",
-                card.format
-              )}
-            >
-              <h2 className="deboss font-title-cursive font-[800] text-primary-light">
-                {card.type}
-              </h2>
-              <div className="gap-title mt-[1rem] flex flex-col">
-                <div className="flex flex-col gap-[0.25rem]">
-                  <h3 className="deboss font-serif font-[400] text-balance text-[#444444]">
-                    {card.locationMain}
-                  </h3>
-                  <p className="relative font-[400] text-[#838383]">
-                    {card.locationSecondary}
-                  </p>
-                </div>
-                <a
-                  className="link-underline relative flex w-fit flex-row items-center hover:brightness-115 font-sans text-footnote font-[500] text-[#8da184]"
-                  href={card.googleMapLink}
-                  target="_blank"
+            <PaperCard className={`overflow-hidden ${card.format}`}>
+              <div
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  width: "100%",
+                  opacity: 0.4,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    right: "-5rem",
+                  }}
                 >
-                  View on Google Maps{" "}
-                  <ChevronRight
-                    size={15}
-                    strokeWidth={2.5}
-                    className="mt-[0.1rem] mr-[-0.3rem]"
+                  <Image
+                    src={bgImages[index]}
+                    alt="church"
+                    sizes="100vh"
+                    priority
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                    }}
                   />
-                </a>
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    width: "100%",
+                    background:
+                      "linear-gradient(to bottom left, transparent 0%, white 75%)",
+                  }}
+                ></div>
+              </div>
+              <div
+                className={`gap-title flex w-full flex-col px-6 py-8 md:px-10 md:py-12`}
+              >
+                <h2 className="deboss font-title-cursive font-[800] text-primary-light">
+                  {card.type}
+                </h2>
+                <div className="gap-title mt-[1rem] flex flex-col">
+                  <div className="flex flex-col gap-[0.25rem]">
+                    <h3 className="deboss font-serif font-[400] text-balance text-[#444444]">
+                      {card.locationMain}
+                    </h3>
+                    <p className="relative font-[400] text-[#838383]">
+                      {card.locationSecondary}
+                    </p>
+                  </div>
+                  <a
+                    className="link-underline relative flex w-fit flex-row items-center font-sans text-footnote font-[500] text-[#8da184] hover:brightness-115"
+                    href={card.googleMapLink}
+                    target="_blank"
+                  >
+                    View on Google Maps{" "}
+                    <ChevronRight
+                      size={15}
+                      strokeWidth={2.5}
+                      className="mt-[0.1rem] mr-[-0.3rem]"
+                    />
+                  </a>
+                </div>
               </div>
             </PaperCard>
           </FadeIn>

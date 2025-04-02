@@ -63,7 +63,7 @@ export default function Program() {
       <Image
         src={leaves_arch}
         alt="King and Kim monogram"
-        className="h-full w-full object-cover mb-[-8rem]"
+        className="h-full w-full object-cover sm:mb-[-8rem] mb-[-6rem]"
       />
       <Title className="text-center">The Wedding Program</Title>
       <div className="flex-col-center w-full gap-[1.25rem]">
