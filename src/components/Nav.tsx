@@ -141,7 +141,7 @@ export default function Nav() {
             RSVP
           </a>
         </div>
-        <div className="relative h-full w-full debug">
+        <div className="relative h-full w-full">
           <Image
             src={monogram}
             alt="King and Kim monogram"
