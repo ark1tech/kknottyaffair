@@ -85,6 +85,7 @@ export default function Video() {
             loop
             disablePictureInPicture
             playsInline
+            muted
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             Your browser does not support the video tag.
