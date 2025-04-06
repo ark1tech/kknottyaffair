@@ -1,5 +1,4 @@
 import Video from "@/components/VideoBackground";
-
 import Story from "@/sections/Story";
 import Message from "@/sections/Message";
 import Hero from "@/sections/Hero";
@@ -12,17 +11,24 @@ import banner_story from "@p/images/photoshoot/banner_story.webp";
 import side_leaf_1 from "@p/backgrounds/side_leaf_1.svg";
 import side_leaf_2 from "@p/backgrounds/side_leaf_2.svg";
 
-import type { Metadata } from "next";
+// import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Kim & King's Wedding",
-  description: "Pre-wedding Gallery of Kim & King",
-};
+// export const metadata: Metadata = {
+//   title: "Kim & King's Wedding",
+//   description: "Pre-wedding Gallery of Kim & King",
+// };
 
 export default function Home() {
+
   return (
     <>
-      <main className="min-h-[100svh]">
+      <main className="relative min-h-[100svh]">
+        <div className="flex-col-bot relative h-[100svh]">
+          <Video />
+          <Hero />
+        </div>
+      </main>
+      <main className="relative">
         <div className="side-leaf-container">
           <Image
             src={side_leaf_1}
@@ -38,10 +44,6 @@ export default function Home() {
             priority
             className="side-leaf-image"
           />
-        </div>
-        <div className="flex-col-bot relative h-[100svh]">
-          <Video />
-          <Hero />
         </div>
         <div className="relative container flex flex-col gap-[4rem]">
           <Intro />

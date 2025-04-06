@@ -606,50 +606,37 @@ main {
 }
 
 .side-leaf-container {
-  display: none; /* Hidden by default for sm and below */
+  display: flex;
   position: absolute;
-  top: 128dvh;
   z-index: -10;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
   overflow-x: hidden;
+  opacity: 20%;
+  top: 8dvh;
 }
 
 .side-leaf-image {
-  width: 13%;
+  width: 150px;
   filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.08));
 }
 
 @media (min-width: 500px) {
   .side-leaf-container {
-    display: flex; /* Show at sm and above */
-    top: 132dvh;
+    top: 5dvh;
   }
-}
-
-@media (min-width: 540px) {
-  .side-leaf-container {
-    top: 130dvh;
-  }
-}
-
-@media (min-width: 768px) {
   .side-leaf-image {
-    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04));
-    width: 15%;
-  }
-
-  .side-leaf-container {
-    top: 126dvh;
+    width: 200px;
   }
 }
 
 @media (min-width: 990px) {
   .side-leaf-container {
-    top: 110dvh;
+    opacity: 100%;
   }
 }
+
 
 .fade-border-container {
   position: relative;

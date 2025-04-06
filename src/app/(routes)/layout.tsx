@@ -10,6 +10,7 @@ import {
 import localFont from "next/font/local";
 import Nav from "@/components/Nav";
 import Head from "next/head";
+import { Metadata } from "next";
 
 // TAN Memories
 
@@ -55,6 +56,11 @@ const titleGothic = Cinzel({
   variable: "--font-title-gothic",
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  title: "Kim & King's Wedding",
+  description: "Pre-wedding Gallery of Kim & King",
+};
 
 export default function RootLayout({
   children,
