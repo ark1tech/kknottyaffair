@@ -38,6 +38,7 @@ export default function Video() {
 
   useEffect(() => {
     const videoElement = videoRef.current;
+    console.log(isSafari);
     if (videoElement) {
       if (shouldPlay && !isSafari) {
         videoElement.play();
@@ -86,6 +87,7 @@ export default function Video() {
             disablePictureInPicture
             playsInline
             muted
+            preload="auto"
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             Your browser does not support the video tag.
