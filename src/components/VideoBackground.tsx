@@ -1,53 +1,53 @@
 "use client";
 
-// import { useRef, useEffect } from "react";
-// import { useBrowser } from "@/hooks/use-browser";
+import { useRef, useEffect } from "react";
+import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
 
 export default function Video() {
-  // const videoRef = useRef<HTMLVideoElement>(null);
-  // const { isSafari } = useBrowser();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { isSafari } = useBrowser();
 
-  // useEffect(() => {
-  //   const videoElement = videoRef.current;
+  useEffect(() => {
+    const videoElement = videoRef.current;
 
-  //   const handleUserInteraction = () => {
-  //     if (videoElement && !isSafari) {
-  //       videoElement.muted = false;
-  //       fadeInAudio(videoElement);
-  //     }
-  //     // Remove the event listeners after unmuting
-  //     videoElement?.removeEventListener("mouseenter", handleUserInteraction);
-  //     videoElement?.removeEventListener("touchstart", handleUserInteraction);
-  //   };
+    const handleUserInteraction = () => {
+      if (videoElement && !isSafari) {
+        videoElement.muted = false;
+        fadeInAudio(videoElement);
+      }
+      // Remove the event listeners after unmuting
+      videoElement?.removeEventListener("mouseenter", handleUserInteraction);
+      videoElement?.removeEventListener("touchstart", handleUserInteraction);
+    };
 
-  //   const fadeInAudio = (videoElement: HTMLVideoElement) => {
-  //     let volume = 0;
-  //     videoElement.volume = volume;
-  //     const fadeInterval = setInterval(() => {
-  //       if (volume < 1) {
-  //         volume += 0.1; // Adjust the increment for a smoother or faster fade
-  //         videoElement.volume = Math.min(volume, 1);
-  //       } else {
-  //         clearInterval(fadeInterval);
-  //       }
-  //     }, 300); // Adjust the interval time for a smoother or faster fade
-  //   };
+    const fadeInAudio = (videoElement: HTMLVideoElement) => {
+      let volume = 0;
+      videoElement.volume = volume;
+      const fadeInterval = setInterval(() => {
+        if (volume < 0.1) {
+          volume += 0.02; // Adjust the increment for a smoother or faster fade
+          videoElement.volume = Math.min(volume, 1);
+        } else {
+          clearInterval(fadeInterval);
+        }
+      }, 300); // Adjust the interval time for a smoother or faster fade
+    };
 
-  //   if (videoElement) {
-  //     // Add event listeners for user interaction
-  //     videoElement.addEventListener("mouseenter", handleUserInteraction);
-  //     videoElement.addEventListener("touchstart", handleUserInteraction);
-  //   }
+    if (videoElement) {
+      // Add event listeners for user interaction
+      videoElement.addEventListener("mouseenter", handleUserInteraction);
+      videoElement.addEventListener("touchstart", handleUserInteraction);
+    }
 
-  //   return () => {
-  //     if (videoElement) {
-  //       // Clean up the event listeners on component unmount
-  //       videoElement.removeEventListener("mouseenter", handleUserInteraction);
-  //       videoElement.removeEventListener("touchstart", handleUserInteraction);
-  //     }
-  //   };
-  // }, [isSafari]);
+    return () => {
+      if (videoElement) {
+        // Clean up the event listeners on component unmount
+        videoElement.removeEventListener("mouseenter", handleUserInteraction);
+        videoElement.removeEventListener("touchstart", handleUserInteraction);
+      }
+    };
+  }, [isSafari]);
 
   return (
     <div
@@ -71,8 +71,7 @@ export default function Video() {
         }}
       >
         <video
-          // ref={videoRef}
-          // className="h-full w-full object-cover object-center brightness-[85%]"
+          ref={videoRef}
           style={{
             height: "100%",
             width: "100%",

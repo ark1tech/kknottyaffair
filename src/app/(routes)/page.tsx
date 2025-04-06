@@ -32,9 +32,6 @@ export default function FirstLoad() {
           <h1 className="deboss magic-text z-10 mb-[-2rem] w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
             You&rsquo;re duly invited to
           </h1>
-          {/* <h1 className="hero-heading deboss magic-text z-10 w-full pt-[1.8rem] pb-[3rem] text-center font-title-cursive font-[500] brightness-85 contrast-[120%]">
-            Kim & King&rsquo;s Wedding
-          </h1> */}
           <div className="flex h-fit w-fit">
             <Image
               src={monogram}

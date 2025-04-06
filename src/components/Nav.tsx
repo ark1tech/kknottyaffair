@@ -141,13 +141,13 @@ export default function Nav() {
             RSVP
           </a>
         </div>
-        <div className="flex h-full">
+        <div className="relative h-full w-full debug">
           <Image
             src={monogram}
             alt="King and Kim monogram"
             priority
-            sizes="20vh"
-            className="absolute bottom-0 scale-80 opacity-60 hover:brightness-150"
+            sizes="20vw"
+            className="absolute bottom-0 h-[20vh] w-auto opacity-60 hover:brightness-150"
           />
         </div>
       </div>

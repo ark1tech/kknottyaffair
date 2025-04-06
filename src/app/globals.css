@@ -722,68 +722,53 @@ main {
     height: 70dvh;
   }
 }
-/* Add support for CSS anchor positioning */
-@supports (anchor-name: --anchor) {
-  .fixed {
-    position: fixed;
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .info-container {
+    flex-direction: row;
+    gap: 2rem;
   }
 }
 
-/* Fallback for browsers that don't support anchor positioning */
-@supports not (anchor-name: --anchor) {
-  .fixed {
-    position: absolute;
+@media (min-width: 1024px) {
+  .info-container {
+    gap: 4rem;
   }
 }
 
-.bg-decoration {
-  position: absolute;
-  width: 10%;
-  z-index: -1;
+@media (min-width: 768px) {
+  .info-card {
+    padding: 2.5rem 2.5rem;
+  }
+  .info-card-church {
+    rotate: -2deg;
+  }
+  .info-card-reception {
+    rotate: 4deg;
+  }
+  .dress-code-container {
+    max-width: 50%;
+  }
 }
 
-.music-decoration {
-  width: 25%;
-  left: -10%;
-  transform: rotate(-12deg);
-  top: anchor(--music-anchor bottom);
-}
-
-.rings-decoration {
-  width: 25%;
-  right: -10%;
-  top: anchor(--rings-anchor top);
-}
-
-.toast-decoration {
-  width: 25%;
-  left: -10%;
-  top: anchor(--toast-anchor top);
-}
-
-.cake-decoration {
-  width: 25%;
-  right: -20%;
-  top: anchor(--cake-anchor top);
-}
-
-/* Anchor elements */
-.music-anchor {
-  position: relative;
-  anchor-name: --music-anchor;
-}
-
-.rings-anchor {
-  position: relative;
-  anchor-name: --rings-anchor;
-}
-
-.toast-anchor {
-  position: relative;
-  anchor-name: --toast-anchor;
-}
-
-.cake-anchor {
-  position: relative;
-  anchor-name: --cake-anchor;
+@media (min-width: 768px) {
+  .card-padding {
+    padding: 2.5rem /* 40px */ 3rem /* 48px */;
+  }
+  .card-rotate-1 {
+    transform: rotate(-2deg);
+  }
+  .card-rotate-2 {
+    transform: rotate(4deg);
+  }
+  .dress-code-width {
+    max-width: 50%;
+  }
 }

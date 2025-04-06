@@ -1,11 +1,6 @@
 import Title from "@/components/text/Title";
 import Image from "next/image";
 import leaves_arch from "@p/images/leaves-arch.svg";
-import music_bg from "@p/backgrounds/music_bg.svg";
-import rings_bg from "@p/backgrounds/rings_bg.svg";
-import toast_bg from "@p/backgrounds/toast_bg.svg";
-import cake_bg from "@p/backgrounds/cake_bg.svg";
-
 const programSchedule = [
   {
     time: "2:00 PM",
@@ -75,17 +70,7 @@ export default function Program() {
           {programSchedule.map((item, index) => (
             <div
               key={index}
-              className={`program-item flex w-full flex-row items-start gap-[2rem] ${
-                index === 0
-                  ? "music-anchor"
-                  : index === 2
-                    ? "rings-anchor"
-                    : index === 5
-                      ? "toast-anchor"
-                      : index === 8
-                        ? "cake-anchor"
-                        : ""
-              }`}
+              className={`program-item flex w-full flex-row items-start gap-[2rem]`}
             >
               <h4 className="w-[30%] text-right font-serif font-[200]">
                 {item.time}
@@ -99,35 +84,6 @@ export default function Program() {
             </div>
           ))}
         </div>
-
-        <Image
-          src={music_bg}
-          sizes="5vw"
-          alt="background"
-          priority
-          className="bg-decoration music-decoration"
-        />
-        <Image
-          src={rings_bg}
-          sizes="5vw"
-          alt="background"
-          priority
-          className="bg-decoration rings-decoration"
-        />
-        <Image
-          src={toast_bg}
-          sizes="5vw"
-          alt="background"
-          priority
-          className="bg-decoration toast-decoration"
-        />
-        <Image
-          src={cake_bg}
-          sizes="5vw"
-          alt="background"
-          priority
-          className="bg-decoration cake-decoration"
-        />
       </div>
     </>
   );
