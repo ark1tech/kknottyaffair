@@ -54,7 +54,7 @@ export default function Info() {
                   priority
                   style={{
                     height: "100%",
-                    width: "100%",
+                    width: " ",
                   }}
                 />
               </div>
@@ -125,7 +125,7 @@ export default function Info() {
                   priority
                   style={{
                     height: "100%",
-                    width: "100%",
+                    width: "auto",
                   }}
                 />
               </div>
