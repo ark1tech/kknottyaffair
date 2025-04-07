@@ -12,18 +12,9 @@ export function useBrowser() {
   useEffect(() => {
     const userAgent = window.navigator.userAgent;
 
-    // Safari detection
-    // Safari includes "Safari" in UA but Chrome also includes it, so we need to check for "Chrome" too
-    const isSafariBrowser =
-      userAgent.includes("Safari") &&
-      !userAgent.includes("Chrome") &&
-      !userAgent.includes("Chromium");
-
-    setIsSafari(isSafariBrowser);
-
-    // Get browser name and version (simplified)
     let name = "Unknown";
     let version = "Unknown";
+    let isSafariBrowser = false;
 
     if (userAgent.indexOf("Firefox") > -1) {
       name = "Firefox";
@@ -40,11 +31,14 @@ export function useBrowser() {
     } else if (userAgent.indexOf("Chrome") > -1) {
       name = "Chrome";
       version = userAgent.match(/Chrome\/([0-9.]+)/)?.[1] || "Unknown";
-    } else if (isSafariBrowser) {
+    } else if (userAgent.includes("Safari")) {
+      // Only set as Safari if none of the above browsers were detected
       name = "Safari";
       version = userAgent.match(/Version\/([0-9.]+)/)?.[1] || "Unknown";
+      isSafariBrowser = true;
     }
 
+    setIsSafari(isSafariBrowser);
     setBrowserInfo({ name, version });
   }, []);
 
