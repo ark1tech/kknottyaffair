@@ -30,10 +30,17 @@ export default function Video() {
 
   const handleMuteToggle = () => {
     if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-      if (!videoRef.current.muted) {
+      const newMutedState = !videoRef.current.muted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+      console.log("🔊 Mute toggled:", {
+        muted: newMutedState,
+        volume: videoRef.current.volume,
+      });
+
+      if (!newMutedState) {
         videoRef.current.volume = 0.05;
+        console.log("🔊 Volume set to:", videoRef.current.volume);
       }
     }
   };
@@ -56,28 +63,59 @@ export default function Video() {
 
     if (videoElement) {
       // Event listeners for buffering states
-      const handleWaiting = () => setIsBuffering(true);
-      const handlePlaying = () => setIsBuffering(false);
-      const handleCanPlayThrough = () => setIsBuffering(false);
-      const handleLoadedData = () => setIsBuffering(false);
+      const handleWaiting = () => {
+        console.log("🎥 Video is buffering/waiting...");
+        setIsBuffering(true);
+      };
+
+      const handlePlaying = () => {
+        console.log("🎥 Video started playing", {
+          muted: videoElement.muted,
+          volume: videoElement.volume,
+          currentTime: videoElement.currentTime,
+        });
+        setIsBuffering(false);
+      };
+
+      const handleCanPlayThrough = () => {
+        console.log("🎥 Video can play through without buffering");
+        setIsBuffering(false);
+      };
+
+      const handleLoadedData = () => {
+        console.log("🎥 Video data loaded", {
+          duration: videoElement.duration,
+          readyState: videoElement.readyState,
+        });
+        setIsBuffering(false);
+      };
 
       // Add event listeners
       videoElement.addEventListener("waiting", handleWaiting);
       videoElement.addEventListener("playing", handlePlaying);
       videoElement.addEventListener("canplaythrough", handleCanPlayThrough);
       videoElement.addEventListener("loadeddata", handleLoadedData);
+      // Add pause event listener
+      videoElement.addEventListener("pause", () => {
+        console.log("🎥 Video paused", {
+          currentTime: videoElement.currentTime,
+        });
+      });
 
       if (browserInfo.name) {
-        console.log(isSafari, browserInfo);
+        console.log("🌐 Browser info:", {
+          browser: browserInfo.name,
+          isSafari,
+        });
         if (shouldPlay && !isSafari) {
-          console.log("meow");
+          console.log("🎥 Attempting to play video...");
           videoElement.play().catch((error) => {
-            console.error("Error playing video:", error);
+            console.error("❌ Error playing video:", error);
           });
           videoElement.muted = false;
           fadeInAudio(videoElement);
         } else if (isSafari) {
-          // Show play button for Safari
+          console.log("🌐 Safari detected, showing play button");
           setShowPlayButton(true);
         }
       }
@@ -91,6 +129,7 @@ export default function Video() {
           handleCanPlayThrough
         );
         videoElement.removeEventListener("loadeddata", handleLoadedData);
+        videoElement.removeEventListener("pause", () => {});
       };
     }
   }, [shouldPlay, isSafari, browserInfo]);
