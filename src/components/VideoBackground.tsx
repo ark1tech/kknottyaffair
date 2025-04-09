@@ -5,7 +5,7 @@ import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
 // import { useVideoStore } from "@/store/video-store";
 import VideoSpinner from "@/components/Loader";
-import { Volume2, VolumeX, Play } from "lucide-react";
+import { Volume2, VolumeX, Play } from 'lucide-react';
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -15,6 +15,7 @@ export default function Video() {
   const [isBuffering, setIsBuffering] = useState(true);
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
+  const [userHasInteracted, setUserHasInteracted] = useState(false);
 
   const fadeInAudio = (videoElement: HTMLVideoElement) => {
     let volume = 0;
@@ -57,6 +58,7 @@ export default function Video() {
       setIsMuted(false);
       fadeInAudio(videoElement);
       setShowPlayButton(false);
+      setUserHasInteracted(true); // Mark that user has interacted
     }
   };
 
@@ -77,6 +79,7 @@ export default function Video() {
           currentTime: videoElement.currentTime,
         });
         setIsBuffering(false);
+        setUserHasInteracted(true); // Consider user as interacted when video plays
       };
 
       const handleCanPlayThrough = () => {
@@ -136,6 +139,28 @@ export default function Video() {
       };
     }
   }, [isSafari, browserInfo]);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement || !userHasInteracted) return;
+
+    // Check video playback status every 2 seconds
+    const playbackCheckInterval = setInterval(() => {
+      if (videoElement && !videoElement.paused) {
+        // Video is playing, nothing to do
+      } else if (videoElement && videoElement.paused) {
+        console.log("🎥 Video is paused when it should be playing");
+        // Attempt to resume playback
+        videoElement.play().catch(error => {
+          console.error("❌ Failed to resume video playback:", error);
+        });
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(playbackCheckInterval);
+    };
+  }, [userHasInteracted]);
 
   return (
     <>
