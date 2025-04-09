@@ -19,7 +19,7 @@ export default function Video() {
     let volume = 0;
     videoElement.volume = volume;
     const fadeInterval = setInterval(() => {
-      if (volume < 0.1) {
+      if (volume < 0.05) {
         volume += 0.02;
         videoElement.volume = Math.min(volume, 1);
       } else {
@@ -158,7 +158,7 @@ export default function Video() {
             disablePictureInPicture
             playsInline
             muted
-            preload="auto"
+            // preload="auto"
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
