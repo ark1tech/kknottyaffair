@@ -3,17 +3,18 @@
 import { useRef, useEffect, useState } from "react";
 import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
-import { useVideoStore } from "@/store/video-store";
+// import { useVideoStore } from "@/store/video-store";
 import VideoSpinner from "@/components/Loader";
 import { Volume2, VolumeX, Play } from "lucide-react";
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const shouldPlay = useVideoStore((state) => state.shouldPlay);
+  // const shouldPlay = useVideoStore((state) => state.shouldPlay);
   const { isSafari, browserInfo } = useBrowser();
   const [isMuted, setIsMuted] = useState(false);
   const [isBuffering, setIsBuffering] = useState(true);
   const [showPlayButton, setShowPlayButton] = useState(false);
+  const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
 
   const fadeInAudio = (videoElement: HTMLVideoElement) => {
     let volume = 0;
@@ -33,6 +34,7 @@ export default function Video() {
       const newMutedState = !videoRef.current.muted;
       videoRef.current.muted = newMutedState;
       setIsMuted(newMutedState);
+      setShowUnmuteTooltip(false); // Hide tooltip when button is clicked
       console.log("🔊 Mute toggled:", {
         muted: newMutedState,
         volume: videoRef.current.volume,
@@ -107,13 +109,14 @@ export default function Video() {
           browser: browserInfo.name,
           isSafari,
         });
-        if (shouldPlay && !isSafari) {
+        if (!isSafari) {
           console.log("🎥 Attempting to play video...");
           videoElement.play().catch((error) => {
             console.error("❌ Error playing video:", error);
           });
-          videoElement.muted = false;
-          fadeInAudio(videoElement);
+          videoElement.muted = true;
+          setIsMuted(true);
+          // setShowUnmuteTooltip(true); 
         } else if (isSafari) {
           console.log("🌐 Safari detected, showing play button");
           setShowPlayButton(true);
@@ -132,7 +135,7 @@ export default function Video() {
         videoElement.removeEventListener("pause", () => {});
       };
     }
-  }, [shouldPlay, isSafari, browserInfo]);
+  }, [isSafari, browserInfo]);
 
   return (
     <>
@@ -158,7 +161,7 @@ export default function Video() {
             disablePictureInPicture
             playsInline
             muted
-            // preload="auto"
+            preload="metadata"
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
@@ -181,19 +184,27 @@ export default function Video() {
         </div>
       </div>
 
-      <button
-        onClick={handleMuteToggle}
-        className="hover:shadow-glow fixed right-5 bottom-5 z-50 flex cursor-pointer items-center gap-2 rounded border border-white/10 bg-black/50 p-2 text-white transition-shadow duration-200"
-      >
-        <p className="flex items-center gap-2 text-sm text-white">
-          {isMuted ? (
-            <VolumeX size={14} strokeWidth={1.75} />
-          ) : (
-            <Volume2 size={14} strokeWidth={1.75} />
-          )}
-          {isMuted ? "Unmute video" : "Mute video"}
-        </p>
-      </button>
+      <div className="fixed right-5 bottom-5 z-50">
+        {showUnmuteTooltip && (
+          <div className="absolute -top-10 right-0 rounded bg-[#7777772e] px-3 py-1.5 text-xs whitespace-nowrap animate-arrow-bounce">
+            <p className="text-sm text-[#e8e8e8]">Click to control audio</p>
+            <div className="absolute top-full right-5 border-4 border-transparent border-t-[#3f3f3f2e]"></div>
+          </div>
+        )}
+        <button
+          onClick={handleMuteToggle}
+          className="hover:shadow-glow flex cursor-pointer items-center gap-2 rounded border border-white/10 bg-black/50 p-2 text-white transition-shadow duration-200"
+        >
+          <p className="flex items-center gap-2 text-sm text-white">
+            {isMuted ? (
+              <VolumeX size={14} strokeWidth={1.75} />
+            ) : (
+              <Volume2 size={14} strokeWidth={1.75} />
+            )}
+            {isMuted ? "Unmute video" : "Mute video"}
+          </p>
+        </button>
+      </div>
     </>
   );
 }

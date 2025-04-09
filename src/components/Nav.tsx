@@ -15,7 +15,7 @@ export default function Nav() {
   const [shouldShow, setShouldShow] = useState(false);
 
   const navItems = [
-    { label: "Home", href: "/", path: "/home" },
+    { label: "Home", href: "/", path: "/" },
     { label: "FAQs", href: "/FAQs", path: "/FAQs" },
     { label: "Invitation", href: "/invitation", path: "/invitation" },
     { label: "Gallery", href: "/gallery", path: "/gallery" },
@@ -24,7 +24,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   useLayoutEffect(() => {
-    if (pathname !== "/" && pathname !== "/home") {
+    if (pathname !== "/") {
       setShouldShow(true);
       return;
     }

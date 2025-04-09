@@ -31,7 +31,7 @@ export default function Info() {
     <>
       <div className="info-container">
         <FadeIn delay={0.2}>
-          <PaperCard className="card-rotate-1 translate-y-[-0.5rem] rotate-[-1deg] overflow-hidden transition-transform hover:rotate-[0deg]">
+          <PaperCard className="card-rotate-1 pt-[0.5rem] translate-y-[-0.5rem] rotate-[-1deg] overflow-hidden transition-transform hover:rotate-[0deg]">
             <div
               style={{
                 position: "absolute",
@@ -50,11 +50,11 @@ export default function Info() {
                 <Image
                   src={church}
                   alt="church"
-                  sizes="100vh"
+                  sizes="30vh"
                   priority
                   style={{
-                    height: "100%",
-                    width: " ",
+                    height: "auto",
+                    width: "400px",
                   }}
                 />
               </div>
@@ -102,7 +102,7 @@ export default function Info() {
         </FadeIn>
 
         <FadeIn delay={0.25}>
-          <PaperCard className="card-rotate-2 translate-y-[1.5rem] rotate-[2deg] overflow-hidden transition-transform hover:rotate-[1deg]">
+          <PaperCard className="card-rotate-2 pt-[0.5rem] translate-y-[1.5rem] rotate-[2deg] overflow-hidden transition-transform hover:rotate-[1deg]">
             <div
               style={{
                 position: "absolute",
@@ -121,11 +121,11 @@ export default function Info() {
                 <Image
                   src={leticia}
                   alt="leticia"
-                  sizes="100vh"
+                  sizes="20vh"
                   priority
                   style={{
-                    height: "100%",
-                    width: "auto",
+                    height: "auto",
+                    width: "400px",
                   }}
                 />
               </div>
