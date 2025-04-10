@@ -4,14 +4,14 @@ import { useRef, useEffect, useState } from "react";
 import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
 import VideoSpinner from "@/components/Loader";
-import { Volume2, VolumeX, Play } from "lucide-react";
+import { Volume2, VolumeX } from "lucide-react";
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isSafari, browserInfo } = useBrowser();
   const [isMuted, setIsMuted] = useState(false);
-  const [isBuffering, setIsBuffering] = useState(true);
-  const [showPlayButton, setShowPlayButton] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
+  // const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
 
@@ -55,7 +55,7 @@ export default function Video() {
       videoElement.muted = false;
       setIsMuted(false);
       fadeInAudio(videoElement);
-      setShowPlayButton(false);
+      // setShowPlayButton(false);
       setUserHasInteracted(true); // Mark that user has interacted
     }
   };
@@ -98,7 +98,7 @@ export default function Video() {
           currentTime: videoElement.currentTime,
         });
         setIsBuffering(false);
-        setShowPlayButton(true);
+        // setShowPlayButton(true);
       };
 
       // Add event listeners
@@ -122,8 +122,10 @@ export default function Video() {
           setIsMuted(true);
           // setShowUnmuteTooltip(true);
         } else if (isSafari) {
+          videoElement.muted = true;
+          setIsMuted(true);
           console.log("🌐 Safari detected, showing play button");
-          setShowPlayButton(true);
+          // setShowPlayButton(true);
         }
       }
 
@@ -167,9 +169,9 @@ export default function Video() {
     <>
       <div className="absolute inset-0 z-0 h-screen w-full overflow-hidden">
         <div className="relative h-full w-full">
-          {isBuffering && !showPlayButton && <VideoSpinner />}
+          {isBuffering && <VideoSpinner />}
 
-          {showPlayButton && isSafari && (
+          {/* {isSafari && (
             <button
               onClick={handlePlayVideo}
               className="absolute cursor-pointer top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-[#0000005a] p-6 text-white transition-all duration-300 hover:scale-105 hover:bg-[#000000ac] opacity-50"
@@ -177,7 +179,7 @@ export default function Video() {
             >
               <Play size={32} strokeWidth={1.5} />
             </button>
-          )}
+          )} */}
           <video
             ref={videoRef}
             className="h-full w-full object-cover object-center brightness-85"
@@ -185,6 +187,7 @@ export default function Video() {
             loop
             disablePictureInPicture
             playsInline
+            autoPlay
             muted
             preload="auto"
           >

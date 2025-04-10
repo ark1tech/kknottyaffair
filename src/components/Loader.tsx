@@ -9,7 +9,7 @@ export default function VideoSpinner({ className }: VideoSpinnerProps) {
   return (
     <div
       className={cn(
-        "absolute inset-0 z-10 flex items-center justify-center ",
+        "absolute inset-0 z-10 flex items-center justify-center pointer-events-none",
         className
       )}
     >
