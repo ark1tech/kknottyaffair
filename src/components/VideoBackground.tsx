@@ -15,18 +15,18 @@ export default function Video() {
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
 
-  const fadeInAudio = (videoElement: HTMLVideoElement) => {
-    let volume = 0;
-    videoElement.volume = volume;
-    const fadeInterval = setInterval(() => {
-      if (volume < 0.05) {
-        volume += 0.02;
-        videoElement.volume = Math.min(volume, 1);
-      } else {
-        clearInterval(fadeInterval);
-      }
-    }, 300);
-  };
+  // const fadeInAudio = (videoElement: HTMLVideoElement) => {
+  //   let volume = 0;
+  //   videoElement.volume = volume;
+  //   const fadeInterval = setInterval(() => {
+  //     if (volume < 0.05) {
+  //       volume += 0.02;
+  //       videoElement.volume = Math.min(volume, 1);
+  //     } else {
+  //       clearInterval(fadeInterval);
+  //     }
+  //   }, 300);
+  // };
 
   const handleMuteToggle = () => {
     if (videoRef.current) {
@@ -46,19 +46,19 @@ export default function Video() {
     }
   };
 
-  const handlePlayVideo = () => {
-    const videoElement = videoRef.current;
-    if (videoElement) {
-      videoElement.play().catch((error) => {
-        console.error("Error playing video:", error);
-      });
-      videoElement.muted = false;
-      setIsMuted(false);
-      fadeInAudio(videoElement);
-      // setShowPlayButton(false);
-      setUserHasInteracted(true); // Mark that user has interacted
-    }
-  };
+  // const handlePlayVideo = () => {
+  //   const videoElement = videoRef.current;
+  //   if (videoElement) {
+  //     videoElement.play().catch((error) => {
+  //       console.error("Error playing video:", error);
+  //     });
+  //     videoElement.muted = false;
+  //     setIsMuted(false);
+  //     fadeInAudio(videoElement);
+  //     // setShowPlayButton(false);
+  //     setUserHasInteracted(true); // Mark that user has interacted
+  //   }
+  // };
 
   useEffect(() => {
     const videoElement = videoRef.current;
