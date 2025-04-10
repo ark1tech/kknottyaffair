@@ -70,19 +70,37 @@
   /* Viewport */
   --breakpoint-xs: 28rem;
   --breakpoint-padding: 1250px;
+}
 
-  --animate-arrow-bounce: bounce 1s infinite;
+.animate-arrow-bounce {
+  animation: bounce 1s infinite;
+}
 
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(-20%);
-      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    }
-    50% {
-      transform: none;
-      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    }
+.animate-audio-bounce {
+  animation: audio_bounce 1s infinite;
+}
+
+@keyframes audio_bounce {
+  0%,
+  100% {
+    transform: translateY(-10%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-20%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
 
@@ -597,7 +615,7 @@ main {
 .responsive-iframe {
   width: 100%;
   height: 100%;
-  min-height: 76dvh;
+  min-height: 76svh;
 }
 
 .wrapper:hover .letter {
@@ -614,7 +632,7 @@ main {
   justify-content: space-between;
   overflow-x: hidden;
   opacity: 20%;
-  top: 8dvh;
+  top: 8svh;
 }
 
 .side-leaf-image {
@@ -624,7 +642,7 @@ main {
 
 @media (min-width: 500px) {
   .side-leaf-container {
-    top: 5dvh;
+    top: 5svh;
   }
   .side-leaf-image {
     width: 200px;
@@ -636,7 +654,6 @@ main {
     opacity: 100%;
   }
 }
-
 
 .fade-border-container {
   position: relative;
@@ -687,7 +704,7 @@ main {
 
 .banner-container {
   margin-top: 0rem;
-  height: 30dvh;
+  height: 30svh;
 }
 
 .banner-image {
@@ -700,13 +717,13 @@ main {
 @media (min-width: 640px) {
   .banner-container {
     margin-top: -5rem;
-    height: 50dvh;
+    height: 50svh;
   }
 }
 
 @media (min-width: 768px) {
   .banner-container {
-    height: 70dvh;
+    height: 70svh;
   }
 }
 

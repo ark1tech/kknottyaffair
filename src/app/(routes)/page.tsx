@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <main className="relative h-[100dvh]">
+      <main className="relative h-[100svh]">
         <div className="flex-col-bot relative h-full">
           <Video />
           <Hero />
@@ -62,6 +62,7 @@ export default function Home() {
             placeholder="blur"
             alt="Banner Wedding story"
             sizes="100vw"
+            priority
             className="banner-image fade-from-top"
           />
         </div>

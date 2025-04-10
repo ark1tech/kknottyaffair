@@ -29,7 +29,7 @@ export default function Invitation() {
           className="show-md-down w-full"
         />
       </div>
-      <main className="relative pt-[8dvh] min-h-[90dvh] w-full md:pt-[10dvh]">
+      <main className="relative pt-[8svh] min-h-[90svh] w-full md:pt-[10svh]">
         <div className="container">
           <div className="mt-[-1.5rem] mb-[1.5rem] flex h-full w-full flex-col gap-[1.25rem] saturate-200 md:mt-[-2rem] md:mb-[2.5rem]">
             <h1 className="hero-heading deboss magic-text font-[500 z-10 w-full pt-[2rem] pb-[1.5rem] text-center font-title-cursive brightness-85 contrast-[120%]">
@@ -49,7 +49,7 @@ export default function Invitation() {
                       alt={`Invitation ${index + 1} Modal`}
                       priority
                       placeholder="blur"
-                      className={`image-grid max-h-[60dvh] object-contain drop-shadow-[5px_5px_10px_rgba(0,0,0,0.25)] md:max-h-full`}
+                      className={`image-grid max-h-[60svh] object-contain drop-shadow-[5px_5px_10px_rgba(0,0,0,0.25)] md:max-h-full`}
                     />
                   </ImageModal>
                 </div>

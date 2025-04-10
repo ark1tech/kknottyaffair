@@ -30,7 +30,7 @@ export default function Info() {
   return (
     <>
       <div className="info-container">
-        <FadeIn delay={0.2}>
+        <FadeIn delay={0.1}>
           <PaperCard className="card-rotate-1 pt-[0.5rem] translate-y-[-0.5rem] rotate-[-1deg] overflow-hidden transition-transform hover:rotate-[0deg]">
             <div
               style={{
@@ -101,7 +101,7 @@ export default function Info() {
           </PaperCard>
         </FadeIn>
 
-        <FadeIn delay={0.25}>
+        <FadeIn delay={0.15}>
           <PaperCard className="card-rotate-2 pt-[0.5rem] translate-y-[1.5rem] rotate-[2deg] overflow-hidden transition-transform hover:rotate-[1deg]">
             <div
               style={{
@@ -174,7 +174,7 @@ export default function Info() {
       </div>
 
       <div className="flex-col-center">
-        <FadeIn className="dress-code-width w-full" delay={0.25}>
+        <FadeIn className="dress-code-width w-full" delay={0.15}>
           <PaperCard
             className={cn(
               "gap-title flex w-full flex-col",

@@ -52,7 +52,7 @@ export default function Nav() {
       >
         <div
           className={cn(
-            "nav-container flex h-[8dvh] flex-row items-center justify-between py-4 md:h-[10dvh]",
+            "nav-container flex h-[8svh] flex-row items-center justify-between py-4 md:h-[10svh]",
             "before:absolute before:inset-0 before:bg-[url('/images/paper-texture.jpg')] before:bg-repeat before:opacity-100 before:mix-blend-overlay before:content-['']"
           )}
         >

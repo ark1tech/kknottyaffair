@@ -4,29 +4,29 @@ import { useRef, useEffect, useState } from "react";
 import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
 import VideoSpinner from "@/components/Loader";
-import { Volume2, VolumeX } from "lucide-react";
+import { Play, Volume2, VolumeX } from "lucide-react";
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isSafari, browserInfo } = useBrowser();
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isBuffering, setIsBuffering] = useState(false);
-  // const [showPlayButton, setShowPlayButton] = useState(false);
+  const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
   const [userHasInteracted, setUserHasInteracted] = useState(false);
 
-  // const fadeInAudio = (videoElement: HTMLVideoElement) => {
-  //   let volume = 0;
-  //   videoElement.volume = volume;
-  //   const fadeInterval = setInterval(() => {
-  //     if (volume < 0.05) {
-  //       volume += 0.02;
-  //       videoElement.volume = Math.min(volume, 1);
-  //     } else {
-  //       clearInterval(fadeInterval);
-  //     }
-  //   }, 300);
-  // };
+  const fadeInAudio = (videoElement: HTMLVideoElement) => {
+    let volume = 0;
+    videoElement.volume = volume;
+    const fadeInterval = setInterval(() => {
+      if (volume < 0.05) {
+        volume += 0.02;
+        videoElement.volume = Math.min(volume, 1);
+      } else {
+        clearInterval(fadeInterval);
+      }
+    }, 300);
+  };
 
   const handleMuteToggle = () => {
     if (videoRef.current) {
@@ -46,19 +46,19 @@ export default function Video() {
     }
   };
 
-  // const handlePlayVideo = () => {
-  //   const videoElement = videoRef.current;
-  //   if (videoElement) {
-  //     videoElement.play().catch((error) => {
-  //       console.error("Error playing video:", error);
-  //     });
-  //     videoElement.muted = false;
-  //     setIsMuted(false);
-  //     fadeInAudio(videoElement);
-  //     // setShowPlayButton(false);
-  //     setUserHasInteracted(true); // Mark that user has interacted
-  //   }
-  // };
+  const handlePlayVideo = () => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.play().catch((error) => {
+        console.error("Error playing video:", error);
+      });
+      videoElement.muted = false;
+      setIsMuted(false);
+      fadeInAudio(videoElement);
+      setShowPlayButton(false);
+      setUserHasInteracted(true); // Mark that user has interacted
+    }
+  };
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -77,12 +77,14 @@ export default function Video() {
           currentTime: videoElement.currentTime,
         });
         setIsBuffering(false);
-        setUserHasInteracted(true); // Consider user as interacted when video plays
+        setShowPlayButton(false);
+        setUserHasInteracted(true); 
       };
 
       const handleCanPlayThrough = () => {
         console.log("🎥 Video can play through without buffering");
         setIsBuffering(false);
+        setShowPlayButton(true);
       };
 
       const handleLoadedData = () => {
@@ -91,6 +93,7 @@ export default function Video() {
           readyState: videoElement.readyState,
         });
         setIsBuffering(false);
+        setShowPlayButton(true);
       };
 
       const handlePaused = () => {
@@ -98,7 +101,7 @@ export default function Video() {
           currentTime: videoElement.currentTime,
         });
         setIsBuffering(false);
-        // setShowPlayButton(true);
+        setShowPlayButton(true);
       };
 
       // Add event listeners
@@ -119,13 +122,10 @@ export default function Video() {
             console.error("❌ Error playing video:", error);
           });
           videoElement.muted = true;
-          setIsMuted(true);
-          // setShowUnmuteTooltip(true);
         } else if (isSafari) {
-          videoElement.muted = true;
-          setIsMuted(true);
           console.log("🌐 Safari detected, showing play button");
-          // setShowPlayButton(true);
+          videoElement.muted = true;
+          setShowPlayButton(true);
         }
       }
 
@@ -167,11 +167,11 @@ export default function Video() {
 
   return (
     <>
-      <div className="absolute inset-0 z-0 h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
         <div className="relative h-full w-full">
-          {isBuffering && <VideoSpinner />}
+          {isBuffering && !showPlayButton && <VideoSpinner />}
 
-          {/* {isSafari && (
+          {isSafari && showPlayButton && (
             <button
               onClick={handlePlayVideo}
               className="absolute cursor-pointer top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-[#0000005a] p-6 text-white transition-all duration-300 hover:scale-105 hover:bg-[#000000ac] opacity-50"
@@ -179,7 +179,7 @@ export default function Video() {
             >
               <Play size={32} strokeWidth={1.5} />
             </button>
-          )} */}
+          )}
           <video
             ref={videoRef}
             className="h-full w-full object-cover object-center brightness-85"
@@ -191,7 +191,6 @@ export default function Video() {
             preload="auto"
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
-            <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
@@ -213,9 +212,9 @@ export default function Video() {
 
       <div className="fixed right-5 bottom-5 z-50">
         {showUnmuteTooltip && (
-          <div className="absolute -top-10 right-0 animate-arrow-bounce rounded bg-[#7777772e] px-3 py-1.5 text-xs whitespace-nowrap">
-            <p className="text-sm text-[#e8e8e8]">Click to control audio</p>
-            <div className="absolute top-full right-5 border-4 border-transparent border-t-[#3f3f3f2e]"></div>
+          <div className="absolute -top-10 right-0 animate-audio-bounce rounded bg-[#36363674] px-3 py-1.5 text-xs whitespace-nowrap">
+            <p className="text-sm text-white text-shadow-md">Click to control audio</p>
+            <div className="absolute top-full right-5 border-4 border-transparent border-t-[#36363674]"></div>
           </div>
         )}
         <button
