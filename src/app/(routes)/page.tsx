@@ -5,6 +5,7 @@ import Hero from "@/sections/Hero";
 import Intro from "@/sections/Intro";
 import Info from "@/sections/Info";
 import Program from "@/sections/Program";
+import { Metadata } from "next";
 
 import Image from "next/image";
 import banner_story from "@p/images/photoshoot/banner_story.webp";
@@ -13,13 +14,12 @@ import side_leaf_2 from "@p/backgrounds/side_leaf_2.svg";
 
 // import type { Metadata } from "next";
 
-// export const metadata: Metadata = {
-//   title: "Kim & King's Wedding",
-//   description: "Pre-wedding Gallery of Kim & King",
-// };
+export const metadata: Metadata = {
+  title: "Kim & King's Wedding",
+  description: "Pre-wedding Gallery of Kim & King",
+};
 
 export default function Home() {
-
   return (
     <>
       <main className="relative min-h-[100svh]">

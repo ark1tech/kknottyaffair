@@ -3,13 +3,11 @@
 import { useRef, useEffect, useState } from "react";
 import { useBrowser } from "@/hooks/use-browser";
 import BlurIn from "@/components/BlurIn";
-// import { useVideoStore } from "@/store/video-store";
 import VideoSpinner from "@/components/Loader";
-import { Volume2, VolumeX, Play } from 'lucide-react';
+import { Volume2, VolumeX, Play } from "lucide-react";
 
 export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  // const shouldPlay = useVideoStore((state) => state.shouldPlay);
   const { isSafari, browserInfo } = useBrowser();
   const [isMuted, setIsMuted] = useState(false);
   const [isBuffering, setIsBuffering] = useState(true);
@@ -95,17 +93,20 @@ export default function Video() {
         setIsBuffering(false);
       };
 
+      const handlePaused = () => {
+        console.log("🎥 Video paused", {
+          currentTime: videoElement.currentTime,
+        });
+        setIsBuffering(false);
+        setShowPlayButton(true);
+      };
+
       // Add event listeners
       videoElement.addEventListener("waiting", handleWaiting);
       videoElement.addEventListener("playing", handlePlaying);
       videoElement.addEventListener("canplaythrough", handleCanPlayThrough);
       videoElement.addEventListener("loadeddata", handleLoadedData);
-      // Add pause event listener
-      videoElement.addEventListener("pause", () => {
-        console.log("🎥 Video paused", {
-          currentTime: videoElement.currentTime,
-        });
-      });
+      videoElement.addEventListener("pause", handlePaused);
 
       if (browserInfo.name) {
         console.log("🌐 Browser info:", {
@@ -119,7 +120,7 @@ export default function Video() {
           });
           videoElement.muted = true;
           setIsMuted(true);
-          // setShowUnmuteTooltip(true); 
+          // setShowUnmuteTooltip(true);
         } else if (isSafari) {
           console.log("🌐 Safari detected, showing play button");
           setShowPlayButton(true);
@@ -135,7 +136,7 @@ export default function Video() {
           handleCanPlayThrough
         );
         videoElement.removeEventListener("loadeddata", handleLoadedData);
-        videoElement.removeEventListener("pause", () => {});
+        videoElement.removeEventListener("pause", handlePaused);
       };
     }
   }, [isSafari, browserInfo]);
@@ -151,7 +152,7 @@ export default function Video() {
       } else if (videoElement && videoElement.paused) {
         console.log("🎥 Video is paused when it should be playing");
         // Attempt to resume playback
-        videoElement.play().catch(error => {
+        videoElement.play().catch((error) => {
           console.error("❌ Failed to resume video playback:", error);
         });
       }
@@ -171,13 +172,12 @@ export default function Video() {
           {showPlayButton && isSafari && (
             <button
               onClick={handlePlayVideo}
-              className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-black/50 p-6 text-white transition-all duration-300 hover:scale-105 hover:bg-black/70"
+              className="absolute cursor-pointer top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-[#0000005a] p-6 text-white transition-all duration-300 hover:scale-105 hover:bg-[#000000ac] opacity-50"
               aria-label="Play video"
             >
-              <Play size={32} strokeWidth={1.75} />
+              <Play size={32} strokeWidth={1.5} />
             </button>
           )}
-
           <video
             ref={videoRef}
             className="h-full w-full object-cover object-center brightness-85"
@@ -211,7 +211,7 @@ export default function Video() {
 
       <div className="fixed right-5 bottom-5 z-50">
         {showUnmuteTooltip && (
-          <div className="absolute -top-10 right-0 rounded bg-[#7777772e] px-3 py-1.5 text-xs whitespace-nowrap animate-arrow-bounce">
+          <div className="absolute -top-10 right-0 animate-arrow-bounce rounded bg-[#7777772e] px-3 py-1.5 text-xs whitespace-nowrap">
             <p className="text-sm text-[#e8e8e8]">Click to control audio</p>
             <div className="absolute top-full right-5 border-4 border-transparent border-t-[#3f3f3f2e]"></div>
           </div>
