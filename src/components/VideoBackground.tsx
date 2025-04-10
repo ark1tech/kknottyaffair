@@ -13,7 +13,7 @@ export default function Video() {
   const [isBuffering, setIsBuffering] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
-  const [userHasInteracted, setUserHasInteracted] = useState(false);
+  // const [userHasInteracted, setUserHasInteracted] = useState(false);
 
   const fadeInAudio = (videoElement: HTMLVideoElement) => {
     let volume = 0;
@@ -53,10 +53,10 @@ export default function Video() {
         console.error("Error playing video:", error);
       });
       videoElement.muted = false;
-      setIsMuted(false);
       fadeInAudio(videoElement);
+      setIsMuted(false);
       setShowPlayButton(false);
-      setUserHasInteracted(true); // Mark that user has interacted
+      // setUserHasInteracted(true); // Mark that user has interacted
     }
   };
 
@@ -78,7 +78,7 @@ export default function Video() {
         });
         setIsBuffering(false);
         setShowPlayButton(false);
-        setUserHasInteracted(true); 
+        // setUserHasInteracted(true); 
       };
 
       const handleCanPlayThrough = () => {
@@ -143,27 +143,27 @@ export default function Video() {
     }
   }, [isSafari, browserInfo]);
 
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement || !userHasInteracted) return;
+  // useEffect(() => {
+  //   const videoElement = videoRef.current;
+  //   if (!videoElement || !userHasInteracted) return;
 
-    // Check video playback status every 2 seconds
-    const playbackCheckInterval = setInterval(() => {
-      if (videoElement && !videoElement.paused) {
-        // Video is playing, nothing to do
-      } else if (videoElement && videoElement.paused) {
-        console.log("🎥 Video is paused when it should be playing");
-        // Attempt to resume playback
-        videoElement.play().catch((error) => {
-          console.error("❌ Failed to resume video playback:", error);
-        });
-      }
-    }, 2000);
+  //   // Check video playback status every 2 seconds
+  //   const playbackCheckInterval = setInterval(() => {
+  //     if (videoElement && !videoElement.paused) {
+  //       // Video is playing, nothing to do
+  //     } else if (videoElement && videoElement.paused) {
+  //       console.log("🎥 Video is paused when it should be playing");
+  //       // Attempt to resume playback
+  //       videoElement.play().catch((error) => {
+  //         console.error("❌ Failed to resume video playback:", error);
+  //       });
+  //     }
+  //   }, 2000);
 
-    return () => {
-      clearInterval(playbackCheckInterval);
-    };
-  }, [userHasInteracted]);
+  //   return () => {
+  //     clearInterval(playbackCheckInterval);
+  //   };
+  // }, [userHasInteracted]);
 
   return (
     <>
