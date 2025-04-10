@@ -40,12 +40,6 @@ export default function Video() {
     | BrowserData
     | Record<string, unknown>;
 
-  const logToUI = (message: string, data?: DebugData) => {
-    const logMessage = data ? `${message} ${JSON.stringify(data)}` : message;
-    console.log(logMessage);
-    setDebugLogs((prev) => [...prev.slice(-9), logMessage]);
-  };
-
   const fadeInAudio = (videoElement: HTMLVideoElement) => {
     let volume = 0;
     videoElement.volume = volume;
@@ -95,6 +89,13 @@ export default function Video() {
     const videoElement = videoRef.current;
 
     if (videoElement) {
+      const logToUI = (message: string, data?: DebugData) => {
+        const logMessage = data
+          ? `${message} ${JSON.stringify(data)}`
+          : message;
+        console.log(logMessage);
+        setDebugLogs((prev) => [...prev.slice(-9), logMessage]);
+      };
       // Event listeners for buffering states
       const handleWaiting = () => {
         logToUI("🎥 Video is buffering/waiting...");
@@ -166,7 +167,7 @@ export default function Video() {
         videoElement.removeEventListener("pause", handlePaused);
       };
     }
-  }, [isSafari, browserInfo, logToUI]);
+  }, [isSafari, browserInfo]);
 
   return (
     <>
