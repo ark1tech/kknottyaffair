@@ -13,7 +13,38 @@ export default function Video() {
   const [isBuffering, setIsBuffering] = useState(false);
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
-  // const [userHasInteracted, setUserHasInteracted] = useState(false);
+  const [debugLogs, setDebugLogs] = useState<string[]>([]);
+
+  // Define specific types for the different kinds of debug data
+  type VideoStateData = {
+    muted?: boolean;
+    volume?: number;
+    currentTime?: number;
+    duration?: number;
+    readyState?: number;
+  };
+
+  type ErrorData = {
+    error: string;
+  };
+
+  type BrowserData = {
+    browser?: string;
+    isSafari?: boolean;
+  };
+
+  // Union type for all possible debug data types
+  type DebugData =
+    | VideoStateData
+    | ErrorData
+    | BrowserData
+    | Record<string, unknown>;
+
+  const logToUI = (message: string, data?: DebugData) => {
+    const logMessage = data ? `${message} ${JSON.stringify(data)}` : message;
+    console.log(logMessage);
+    setDebugLogs((prev) => [...prev.slice(-9), logMessage]);
+  };
 
   const fadeInAudio = (videoElement: HTMLVideoElement) => {
     let volume = 0;
@@ -34,14 +65,14 @@ export default function Video() {
       videoRef.current.muted = newMutedState;
       setIsMuted(newMutedState);
       setShowUnmuteTooltip(false); // Hide tooltip when button is clicked
-      console.log("🔊 Mute toggled:", {
+      logToUI("🔊 Mute toggled:", {
         muted: newMutedState,
         volume: videoRef.current.volume,
       });
 
       if (!newMutedState) {
         videoRef.current.volume = 0.05;
-        console.log("🔊 Volume set to:", videoRef.current.volume);
+        logToUI("🔊 Volume set to:", { volume: videoRef.current.volume });
       }
     }
   };
@@ -50,7 +81,7 @@ export default function Video() {
     const videoElement = videoRef.current;
     if (videoElement) {
       videoElement.play().catch((error) => {
-        console.error("Error playing video:", error);
+        logToUI("❌ Error playing video:", { error: error.message });
       });
       videoElement.muted = false;
       fadeInAudio(videoElement);
@@ -66,29 +97,28 @@ export default function Video() {
     if (videoElement) {
       // Event listeners for buffering states
       const handleWaiting = () => {
-        console.log("🎥 Video is buffering/waiting...");
-        setIsBuffering(true);
+        logToUI("🎥 Video is buffering/waiting...");
       };
 
       const handlePlaying = () => {
-        console.log("🎥 Video started playing", {
+        logToUI("🎥 Video started playing", {
           muted: videoElement.muted,
           volume: videoElement.volume,
           currentTime: videoElement.currentTime,
         });
         setIsBuffering(false);
         setShowPlayButton(false);
-        // setUserHasInteracted(true); 
+        // setUserHasInteracted(true);
       };
 
       const handleCanPlayThrough = () => {
-        console.log("🎥 Video can play through without buffering");
+        logToUI("🎥 Video can play through without buffering");
         setIsBuffering(false);
         setShowPlayButton(true);
       };
 
       const handleLoadedData = () => {
-        console.log("🎥 Video data loaded", {
+        logToUI("🎥 Video data loaded", {
           duration: videoElement.duration,
           readyState: videoElement.readyState,
         });
@@ -97,9 +127,7 @@ export default function Video() {
       };
 
       const handlePaused = () => {
-        console.log("🎥 Video paused", {
-          currentTime: videoElement.currentTime,
-        });
+        logToUI("🎥 Video paused", { currentTime: videoElement.currentTime });
         setIsBuffering(false);
         setShowPlayButton(true);
       };
@@ -112,18 +140,15 @@ export default function Video() {
       videoElement.addEventListener("pause", handlePaused);
 
       if (browserInfo.name) {
-        console.log("🌐 Browser info:", {
-          browser: browserInfo.name,
-          isSafari,
-        });
+        logToUI("🌐 Browser info:", { browser: browserInfo.name, isSafari });
         if (!isSafari) {
-          console.log("🎥 Attempting to play video...");
+          logToUI("🎥 Attempting to play video...");
           videoElement.play().catch((error) => {
-            console.error("❌ Error playing video:", error);
+            logToUI("❌ Error playing video:", { error: error.message });
           });
           videoElement.muted = true;
         } else if (isSafari) {
-          console.log("🌐 Safari detected, showing play button");
+          logToUI("🌐 Safari detected, showing play button");
           videoElement.muted = true;
           setShowPlayButton(true);
         }
@@ -141,29 +166,7 @@ export default function Video() {
         videoElement.removeEventListener("pause", handlePaused);
       };
     }
-  }, [isSafari, browserInfo]);
-
-  // useEffect(() => {
-  //   const videoElement = videoRef.current;
-  //   if (!videoElement || !userHasInteracted) return;
-
-  //   // Check video playback status every 2 seconds
-  //   const playbackCheckInterval = setInterval(() => {
-  //     if (videoElement && !videoElement.paused) {
-  //       // Video is playing, nothing to do
-  //     } else if (videoElement && videoElement.paused) {
-  //       console.log("🎥 Video is paused when it should be playing");
-  //       // Attempt to resume playback
-  //       videoElement.play().catch((error) => {
-  //         console.error("❌ Failed to resume video playback:", error);
-  //       });
-  //     }
-  //   }, 2000);
-
-  //   return () => {
-  //     clearInterval(playbackCheckInterval);
-  //   };
-  // }, [userHasInteracted]);
+  }, [isSafari, browserInfo, logToUI]);
 
   return (
     <>
@@ -174,7 +177,7 @@ export default function Video() {
           {isSafari && showPlayButton && (
             <button
               onClick={handlePlayVideo}
-              className="absolute cursor-pointer top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-[#0000005a] p-6 text-white transition-all duration-300 hover:scale-105 hover:bg-[#000000ac] opacity-50"
+              className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform cursor-pointer rounded-full bg-[#0000005a] p-6 text-white opacity-50 transition-all duration-300 hover:scale-105 hover:bg-[#000000ac]"
               aria-label="Play video"
             >
               <Play size={32} strokeWidth={1.5} />
@@ -212,8 +215,10 @@ export default function Video() {
 
       <div className="fixed right-5 bottom-5 z-50">
         {showUnmuteTooltip && (
-          <div className="absolute -top-10 right-0 animate-audio-bounce rounded bg-[#36363674] px-3 py-1.5 text-xs whitespace-nowrap">
-            <p className="text-sm text-white text-shadow-md">Click to control audio</p>
+          <div className="animate-audio-bounce absolute -top-10 right-0 rounded bg-[#36363674] px-3 py-1.5 text-xs whitespace-nowrap">
+            <p className="text-shadow-md text-sm text-white">
+              Click to control audio
+            </p>
             <div className="absolute top-full right-5 border-4 border-transparent border-t-[#36363674]"></div>
           </div>
         )}
@@ -230,6 +235,14 @@ export default function Video() {
             {isMuted ? "Unmute video" : "Mute video"}
           </p>
         </button>
+      </div>
+      <div className="fixed bottom-5 left-5 z-50 max-h-[300px] max-w-[400px] overflow-y-auto rounded-md bg-black/70 p-3 font-mono text-xs text-white">
+        <div className="mb-1 font-bold">Debug Info:</div>
+        {debugLogs.map((log, index) => (
+          <div key={index} className="mb-1 border-b border-white/10 pb-1">
+            {log}
+          </div>
+        ))}
       </div>
     </>
   );
