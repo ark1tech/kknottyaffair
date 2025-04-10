@@ -103,7 +103,7 @@ export default function Nav() {
       </nav>
       <div
         className={cn(
-          "fixed inset-y-0 right-0 z-60 h-full w-[45%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden"
+          "fixed inset-y-0 right-0 z-60 h-[100dvh] w-[45%] transform bg-white transition-transform duration-300 ease-in-out sm:w-[40%] md:hidden"
         )}
         style={{ transform: isMenuOpen ? "translateX(0)" : "translateX(100%)" }}
         role="dialog"
@@ -141,20 +141,11 @@ export default function Nav() {
             RSVP
           </a>
         </div>
-        <div className="relative h-full w-full">
-          <Image
-            src={monogram}
-            alt="King and Kim monogram"
-            priority
-            sizes="20vw"
-            className="absolute bottom-0 h-[20vh] w-auto opacity-60 hover:brightness-150"
-          />
-        </div>
       </div>
 
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/40 md:hidden"
+          className="fixed inset-0 z-50 bg-black/40 md:hidden h-[100dvh]"
           onClick={() => setIsMenuOpen(false)}
         />
       )}

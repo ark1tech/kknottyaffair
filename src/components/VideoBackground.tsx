@@ -187,7 +187,6 @@ export default function Video() {
             loop
             disablePictureInPicture
             playsInline
-            autoPlay
             muted
             preload="auto"
           >

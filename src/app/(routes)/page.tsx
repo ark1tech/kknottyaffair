@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <main className="relative min-h-[100svh]">
-        <div className="flex-col-bot relative h-[100svh]">
+      <main className="relative h-[100dvh]">
+        <div className="flex-col-bot relative h-full">
           <Video />
           <Hero />
         </div>
