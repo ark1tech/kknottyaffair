@@ -186,7 +186,7 @@ export default function Video() {
             disablePictureInPicture
             playsInline
             muted
-            preload="metadata"
+            preload="auto"
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
