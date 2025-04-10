@@ -59,14 +59,8 @@ export default function Video() {
       videoRef.current.muted = newMutedState;
       setIsMuted(newMutedState);
       setShowUnmuteTooltip(false); // Hide tooltip when button is clicked
-      logToUI("🔊 Mute toggled:", {
-        muted: newMutedState,
-        volume: videoRef.current.volume,
-      });
-
       if (!newMutedState) {
         videoRef.current.volume = 0.05;
-        logToUI("🔊 Volume set to:", { volume: videoRef.current.volume });
       }
     }
   };
@@ -75,13 +69,12 @@ export default function Video() {
     const videoElement = videoRef.current;
     if (videoElement) {
       videoElement.play().catch((error) => {
-        logToUI("❌ Error playing video:", { error: error.message });
+        console.error("❌ Error playing video:", { error: error.message });
       });
       videoElement.muted = false;
       fadeInAudio(videoElement);
       setIsMuted(false);
       setShowPlayButton(false);
-      // setUserHasInteracted(true); // Mark that user has interacted
     }
   };
 
