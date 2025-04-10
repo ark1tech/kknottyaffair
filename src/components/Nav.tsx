@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import monogram_cropped from "@p/images/monogram_cropped.png";
-import monogram from "@p/images/monogram.png";
+// import monogram from "@p/images/monogram.png";
 
 import { cn } from "@/lib/utils";
 
