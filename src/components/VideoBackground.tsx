@@ -14,7 +14,9 @@ export default function Video() {
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
   const [debugLogs, setDebugLogs] = useState<string[]>([]);
-  
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   // Define specific types for the different kinds of debug data
   type VideoStateData = {
     muted?: boolean;
@@ -70,12 +72,37 @@ export default function Video() {
     if (videoElement) {
       videoElement.play().catch((error) => {
         console.error("❌ Error playing video:", { error: error.message });
+        setError(error.message);
       });
       videoElement.muted = false;
       fadeInAudio(videoElement);
       setIsMuted(false);
       setShowPlayButton(false);
+      setIsPlaying(true);
     }
+  };
+
+  const handlePauseVideo = () => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.pause();
+      setIsPlaying(false);
+      setShowPlayButton(true);
+    }
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    setShowPlayButton(true);
+  };
+
+  const handleError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const videoElement = e.currentTarget;
+    const errorMessage = videoElement.error
+      ? videoElement.error.message
+      : "Unknown error";
+    setError(errorMessage);
+    console.error("Video error:", errorMessage);
   };
 
   useEffect(() => {
@@ -89,8 +116,10 @@ export default function Video() {
         console.log(logMessage);
         setDebugLogs((prev) => [...prev.slice(-9), logMessage]);
       };
+
       const handleWaiting = () => {
         logToUI("🎥 Video is buffering/waiting...");
+        setIsBuffering(true);
       };
 
       const handlePlaying = () => {
@@ -101,7 +130,7 @@ export default function Video() {
         });
         setIsBuffering(false);
         setShowPlayButton(false);
-        // setUserHasInteracted(true);
+        setIsPlaying(true);
       };
 
       const handleCanPlayThrough = () => {
@@ -123,6 +152,27 @@ export default function Video() {
         logToUI("🎥 Video paused", { currentTime: videoElement.currentTime });
         setIsBuffering(false);
         setShowPlayButton(true);
+        setIsPlaying(false);
+      };
+
+      const handleStalled = () => {
+        logToUI("🎥 Video stalled");
+        setIsBuffering(true);
+        setShowPlayButton(false);
+      };
+
+      const handleEnded = () => {
+        logToUI("🎥 Video ended");
+        setIsPlaying(false);
+        setShowPlayButton(true);
+      };
+
+      const handleError = () => {
+        const errorMessage = videoElement.error
+          ? videoElement.error.message
+          : "Unknown error";
+        setError(errorMessage);
+        logToUI("❌ Video error:", { error: errorMessage });
       };
 
       // Add event listeners
@@ -131,6 +181,9 @@ export default function Video() {
       videoElement.addEventListener("canplaythrough", handleCanPlayThrough);
       videoElement.addEventListener("loadeddata", handleLoadedData);
       videoElement.addEventListener("pause", handlePaused);
+      videoElement.addEventListener("stalled", handleStalled);
+      videoElement.addEventListener("ended", handleEnded);
+      videoElement.addEventListener("error", handleError);
 
       if (browserInfo.name) {
         logToUI("🌐 Browser info:", { browser: browserInfo.name, isSafari });
@@ -138,6 +191,7 @@ export default function Video() {
           logToUI("🎥 Attempting to play video...");
           videoElement.play().catch((error) => {
             logToUI("❌ Error playing video:", { error: error.message });
+            setError(error.message);
           });
           videoElement.muted = true;
         } else if (isSafari) {
@@ -157,6 +211,9 @@ export default function Video() {
         );
         videoElement.removeEventListener("loadeddata", handleLoadedData);
         videoElement.removeEventListener("pause", handlePaused);
+        videoElement.removeEventListener("stalled", handleStalled);
+        videoElement.removeEventListener("ended", handleEnded);
+        videoElement.removeEventListener("error", handleError);
       };
     }
   }, [isSafari, browserInfo]);
@@ -167,11 +224,11 @@ export default function Video() {
         <div className="relative h-full w-full">
           {isBuffering && !showPlayButton && <VideoSpinner />}
 
-          {isSafari && showPlayButton && (
+          {showPlayButton && isSafari && (
             <button
-              onClick={handlePlayVideo}
+              onClick={isPlaying ? handlePauseVideo : handlePlayVideo}
               className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform cursor-pointer rounded-full bg-[#0000005a] p-6 text-white opacity-50 transition-all duration-300 hover:scale-105 hover:bg-[#000000ac]"
-              aria-label="Play video"
+              aria-label={isPlaying ? "Pause video" : "Play video"}
             >
               <Play size={32} strokeWidth={1.5} />
             </button>
@@ -184,7 +241,9 @@ export default function Video() {
             disablePictureInPicture
             playsInline
             muted
-            preload="auto"
+            preload="metadata"
+            onEnded={handleEnded}
+            onError={handleError}
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
@@ -230,8 +289,15 @@ export default function Video() {
           </p>
         </button>
       </div>
+
+      {/* Debug Panel */}
       <div className="fixed bottom-5 left-5 z-50 max-h-[300px] max-w-[400px] overflow-y-auto rounded-md bg-black/70 p-3 font-mono text-xs text-white">
         <div className="mb-1 font-bold">Debug Info:</div>
+        {error && (
+          <div className="mb-1 border-b border-red-500/50 pb-1 text-red-400">
+            Error: {error}
+          </div>
+        )}
         {debugLogs.map((log, index) => (
           <div key={index} className="mb-1 border-b border-white/10 pb-1">
             {log}
