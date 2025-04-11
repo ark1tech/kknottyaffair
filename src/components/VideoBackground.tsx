@@ -91,11 +91,6 @@ export default function Video() {
     }
   };
 
-  const handleEnded = () => {
-    setIsPlaying(false);
-    setShowPlayButton(true);
-  };
-
   const handleError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     const videoElement = e.currentTarget;
     const errorMessage = videoElement.error
@@ -157,14 +152,6 @@ export default function Video() {
 
       const handleStalled = () => {
         logToUI("🎥 Video stalled");
-        setIsBuffering(true);
-        setShowPlayButton(false);
-      };
-
-      const handleEnded = () => {
-        logToUI("🎥 Video ended");
-        setIsPlaying(false);
-        setShowPlayButton(true);
       };
 
       const handleError = () => {
@@ -182,7 +169,6 @@ export default function Video() {
       videoElement.addEventListener("loadeddata", handleLoadedData);
       videoElement.addEventListener("pause", handlePaused);
       videoElement.addEventListener("stalled", handleStalled);
-      videoElement.addEventListener("ended", handleEnded);
       videoElement.addEventListener("error", handleError);
 
       if (browserInfo.name) {
@@ -198,7 +184,6 @@ export default function Video() {
           logToUI("🌐 Safari detected, showing play button");
           videoElement.load();
           videoElement.muted = true;
-          setShowPlayButton(true);
         }
       }
 
@@ -213,7 +198,6 @@ export default function Video() {
         videoElement.removeEventListener("loadeddata", handleLoadedData);
         videoElement.removeEventListener("pause", handlePaused);
         videoElement.removeEventListener("stalled", handleStalled);
-        videoElement.removeEventListener("ended", handleEnded);
         videoElement.removeEventListener("error", handleError);
       };
     }
@@ -243,7 +227,6 @@ export default function Video() {
             playsInline
             muted
             preload="metadata"
-            onEnded={handleEnded}
             onError={handleError}
           >
             <source src="/videos/bg_video_1.mp4" type="video/mp4" />
