@@ -14,7 +14,7 @@ export default function Video() {
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
   const [debugLogs, setDebugLogs] = useState<string[]>([]);
-
+  
   // Define specific types for the different kinds of debug data
   type VideoStateData = {
     muted?: boolean;
@@ -89,7 +89,6 @@ export default function Video() {
         console.log(logMessage);
         setDebugLogs((prev) => [...prev.slice(-9), logMessage]);
       };
-      // Event listeners for buffering states
       const handleWaiting = () => {
         logToUI("🎥 Video is buffering/waiting...");
       };
@@ -188,6 +187,7 @@ export default function Video() {
             preload="auto"
           >
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
+            <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
