@@ -10,7 +10,7 @@ export default function Video() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { isSafari, browserInfo } = useBrowser();
   const [isMuted, setIsMuted] = useState(true);
-  const [isBuffering, setIsBuffering] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(true);
   const [showPlayButton, setShowPlayButton] = useState(false);
   const [showUnmuteTooltip, setShowUnmuteTooltip] = useState(true);
   const [debugLogs, setDebugLogs] = useState<string[]>([]);
