@@ -196,6 +196,7 @@ export default function Video() {
           videoElement.muted = true;
         } else if (isSafari) {
           logToUI("🌐 Safari detected, showing play button");
+          videoElement.load();
           videoElement.muted = true;
           setShowPlayButton(true);
         }
