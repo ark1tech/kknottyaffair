@@ -246,7 +246,6 @@ export default function Video() {
             onEnded={handleEnded}
             onError={handleError}
           >
-            <source src="/videos/bg_video_1.mp4#t=15" type="video/mp4" />
             <source src="/videos/bg_video_1.webm#t=15" type="video/webm" />
             Your browser does not support the video tag.
           </video>
