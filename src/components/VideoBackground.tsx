@@ -17,6 +17,8 @@ export default function Video() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const debugMode = false;
+
   // Define specific types for the different kinds of debug data
   type VideoStateData = {
     muted?: boolean;
@@ -226,7 +228,7 @@ export default function Video() {
             disablePictureInPicture
             playsInline
             muted
-            preload="metadata"
+            preload="auto"
             onError={handleError}
           >
             <source src="/videos/bg_video_1.mp4" type="video/mp4" />
@@ -274,20 +276,21 @@ export default function Video() {
         </button>
       </div>
 
-      {/* Debug Panel */}
-      <div className="fixed bottom-5 left-5 z-50 max-h-[300px] max-w-[400px] overflow-y-auto rounded-md bg-black/70 p-3 font-mono text-xs text-white">
-        <div className="mb-1 font-bold">Debug Info:</div>
-        {error && (
-          <div className="mb-1 border-b border-red-500/50 pb-1 text-red-400">
-            Error: {error}
-          </div>
-        )}
-        {debugLogs.map((log, index) => (
-          <div key={index} className="mb-1 border-b border-white/10 pb-1">
-            {log}
-          </div>
-        ))}
-      </div>
+      {debugMode && (
+        <div className="fixed bottom-5 left-5 z-50 max-h-[300px] max-w-[400px] overflow-y-auto rounded-md bg-black/70 p-3 font-mono text-xs text-white">
+          <div className="mb-1 font-bold">Debug Info:</div>
+          {error && (
+            <div className="mb-1 border-b border-red-500/50 pb-1 text-red-400">
+              Error: {error}
+            </div>
+          )}
+          {debugLogs.map((log, index) => (
+            <div key={index} className="mb-1 border-b border-white/10 pb-1">
+              {log}
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
